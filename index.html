@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Grand Strategy</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f9f9f8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Grand Strategy">
+  <meta name="description" content="UPSC Grand Strategy Command Center — track your preparation, syllabus, tests and more.">
+  <link rel="apple-touch-icon" href="data:image/png;base64,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">
+  <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    /* ─── CLAUDE-INSPIRED WHITE MINIMALIST THEME ─── */
+    :root {
+      --bg: #ffffff;
+      --bg2: #f9f9f8;
+      --bg3: #f1f0ee;
+      --border: #e5e4e2;
+      --border-strong: #d4d3d0;
+      --hover: rgba(0,0,0,0.04);
+      --text: #1a1a18;
+      --text-muted: #6b6b68;
+      --text-dim: #a3a39f;
+
+      --accent-r: 218;
+      --accent-g: 119;
+      --accent-b: 86;
+      --accent: rgb(var(--accent-r), var(--accent-g), var(--accent-b));
+      --accent-soft: rgba(218, 119, 86, 0.1);
+      --accent-mid: rgba(218, 119, 86, 0.2);
+
+      --success: #2d8653;
+      --success-soft: rgba(45, 134, 83, 0.1);
+      --warning: #b45309;
+      --warning-soft: rgba(180, 83, 9, 0.1);
+      --danger: #c0392b;
+      --danger-soft: rgba(192, 57, 43, 0.1);
+
+      --sidebar-w: 240px;
+      --radius: 10px;
+      --radius-sm: 7px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+    /* ─── LAYOUT ─── */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 50;
+      overflow-y: auto;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 36px 44px;
+      padding-bottom: 80px;
+      max-width: 1100px;
+      overflow-x: hidden;
+    }
+
+    .bottom-nav { display: none; }
+
+    @media (max-width: 768px) {
+      .app-layout { flex-direction: column; }
+      .sidebar { display: none; }
+      .main-content { padding: 20px 16px; padding-bottom: 90px; }
+
+      .bottom-nav {
+        display: flex;
+        position: fixed; bottom: 0; left: 0; right: 0;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid var(--border);
+        padding: 10px 16px 22px;
+        z-index: 100;
+        overflow-x: auto;
+        gap: 4px;
+        transition: transform 0.3s ease;
+      }
+      .bottom-nav::-webkit-scrollbar { display: none; }
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    .font-syne { font-family: 'DM Sans', sans-serif; }
+    .font-mono { font-family: 'DM Mono', monospace; }
+
+    .title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s ease;
+    }
+    .card:hover {
+      border-color: var(--border-strong);
+      
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    /* ─── INPUTS ─── */
+    .input-base {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      width: 100%;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      transition: border-color 0.15s ease;
+      appearance: none;
+    }
+    .input-base:focus {
+      border-color: var(--accent);
+      
+    }
+    .input-base::placeholder { color: var(--text-dim); }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      padding: 10px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 13.5px;
+      cursor: pointer;
+      width: 100%;
+      letter-spacing: 0.01em;
+      transition: all 0.15s ease;
+    }
+    .btn:hover { background: var(--bg3); border-color: var(--border-strong); color: var(--text); }
+    .btn:active { transform: scale(0.98); }
+    .btn.primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+      font-weight: 500;
+    }
+    .btn.primary:hover { background: #333; border-color: #333;  }
+    .btn.primary:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+    /* ─── NAV ITEMS ─── */
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      margin-bottom: 2px;
+    }
+    .nav-item:hover { background: var(--hover); color: var(--text); }
+    .nav-item:active { transform: scale(0.98); }
+    .nav-item.active {
+      background: var(--bg3);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── MOBILE TABS ─── */
+    .tab-btn {
+      min-width: 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dim);
+      transition: all 0.15s ease;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9.5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 6px 8px;
+      border-radius: var(--radius-sm);
+    }
+    .tab-btn:active { transform: scale(0.94); }
+    .tab-btn:hover { color: var(--text); background: var(--hover); }
+    .tab-btn.active { color: var(--text); background: var(--bg3); }
+    .tab-btn span.icon { font-size: 18px; transition: transform 0.2s ease; }
+    .tab-btn.active span.icon { transform: scale(1.1); }
+
+    /* ─── PROGRESS & CHARTS ─── */
+    .progress-track { height: 5px; background: var(--bg3); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--text); border-radius: 99px; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* ─── HEATMAP ─── */
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 3px;
+      grid-auto-flow: column;
+    }
+    .heat-cell {
+      aspect-ratio: 1;
+      border-radius: 2px;
+      background: var(--bg3);
+      transition: all 0.2s ease;
+    }
+    .heat-cell:hover { transform: scale(1.15); z-index: 10;  }
+
+    /* ─── SVG LINE CHART ─── */
+    .chart-pt circle { transition: all 0.2s ease; }
+    .chart-pt:hover circle { r: 5; cursor: crosshair; }
+
+    /* ─── BAR CHART ─── */
+    .bar-chart-container { display: flex; align-items: flex-end; gap: 6px; height: 180px; padding-top: 20px; border-bottom: 1px solid var(--border); }
+    .bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; transition: transform 0.15s; }
+    .bar-wrapper:hover { transform: translateY(-3px); }
+    .bar { width: 100%; background: rgba(218,119,86,0.2); border-radius: 3px 3px 0 0; min-height: 2px; transition: height 0.7s cubic-bezier(0.16, 1, 0.3, 1); position: relative; border: 1px solid var(--border); border-bottom: none; }
+    .bar-label { font-size: 9.5px; color: var(--text-dim); font-family: 'DM Mono', monospace; }
+    .bar-value { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 500; opacity: 0; transition: all 0.15s; color: var(--text-muted); white-space: nowrap; }
+    .bar-wrapper:hover .bar-value { opacity: 1; transform: translate(-50%, -3px); }
+
+    /* ─── PREP BADGES ─── */
+    .prep-btn {
+      padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
+      cursor: pointer; border: 1px solid var(--border); background: var(--bg2); color: var(--text-dim);
+      transition: all 0.15s ease;
+    }
+    .prep-btn:active { transform: scale(0.92); }
+    .prep-btn:hover { background: var(--bg3); color: var(--text-muted); border-color: var(--border-strong); }
+    .prep-btn.lvl-0.active { background: var(--bg3); color: var(--text-muted); border-color: var(--border-strong); }
+    .prep-btn.lvl-1.active { background: var(--danger-soft); color: var(--danger); border-color: rgba(192,57,43,0.25); }
+    .prep-btn.lvl-2.active { background: var(--warning-soft); color: var(--warning); border-color: rgba(180,83,9,0.25); }
+    .prep-btn.lvl-3.active { background: var(--success-soft); color: var(--success); border-color: rgba(45,134,83,0.25); }
+
+    /* ─── TOPIC ROWS ─── */
+    .topic-controls { opacity: 0; transition: opacity 0.15s; display: flex; gap: 6px; margin-left: 10px; }
+    .topic-row { transition: background 0.15s; border-radius: var(--radius-sm); padding-left: 8px !important; padding-right: 8px !important; }
+    .topic-row:hover { background: var(--bg2); }
+    .topic-row:hover .topic-controls { opacity: 1; }
+    .action-btn { background: none; border: none; cursor: pointer; color: var(--text-dim); padding: 4px; border-radius: 5px; transition: all 0.15s; }
+    .action-btn:hover { background: var(--bg3); color: var(--text); }
+    .action-btn:active { transform: scale(0.9); }
+    .action-btn.delete:hover { color: var(--danger); background: var(--danger-soft); }
+
+    /* ─── PAPER TABS ─── */
+    .paper-tabs { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--border); scroll-behavior: smooth; }
+    .paper-tabs::-webkit-scrollbar { height: 3px; }
+    .paper-tab { white-space: nowrap; padding: 7px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; font-weight: 400; color: var(--text-muted); transition: all 0.15s; background: transparent; border: 1px solid transparent; font-family: 'DM Sans', sans-serif; }
+    .paper-tab:hover { color: var(--text); background: var(--hover); }
+    .paper-tab:active { transform: scale(0.96); }
+    .paper-tab.active { background: var(--bg2); color: var(--text); border-color: var(--border); font-weight: 500; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .stagger-item { opacity: 0; animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    @keyframes celebratePop {
+      0% { transform: scale(1);  }
+      50% { transform: scale(1.03); border-color: rgba(45,134,83,0.4); }
+      100% { transform: scale(1);  }
+    }
+    .celebrating { animation: celebratePop 0.9s ease forwards; }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-50px) scale(1.3); }
+    }
+    .particle { position: absolute; font-size: 22px; pointer-events: none; animation: floatUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; z-index: 100; }
+
+    /* ─── DIVIDERS & MISC ─── */
+    select.input-base { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a3a39f' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useCallback } = React;
+
+    // ─── TACTICAL HAPTIC ENGINE ───
+    const haptic = (type = 'light') => {
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try {
+          switch (type) {
+            case 'light': navigator.vibrate(10); break;
+            case 'medium': navigator.vibrate(20); break;
+            case 'heavy': navigator.vibrate([30]); break;
+            case 'success': navigator.vibrate([15, 30, 20, 30]); break;
+            case 'error': navigator.vibrate([50, 30, 50]); break;
+            case 'tick': navigator.vibrate(5); break;
+            default: navigator.vibrate(15);
+          }
+        } catch(e) { /* Device doesn't support vibration */ }
+      }
+    };
+
+    // ─── DATA & CONSTANTS ───
+    const SUBJECTS = ["History", "Geography", "Polity", "Economy", "Science & Tech", "Environment", "CSAT", "Current Affairs", "Optional Subject"];
+    const EXAM_TYPES = ["Prelims Full Mock", "Mains Full Mock", "Sectional Test", "CSAT Mock"];
+    const DEPLOYMENT_TYPES = ["Passive Reading", "Revision", "Answer Writing", "Class/Lecture", "Mock Test Analysis"];
+    
+    const DAILY_GOAL = 8;
+    const COUNTER_OFFENSIVE_GOAL = 10;
+    const RETREAT_WINDOW_HOURS = 48;
+    
+    const DEFAULT_SYLLABUS = [
+      {
+        id: "gs1", name: "GS Paper 1",
+        topics: [
+          "Indian Art Forms, Literature and Architecture", "Modern Indian History (mid-18th cent. to present)", "The Freedom Struggle (Stages & Contributors)",
+          "Post-independence Consolidation & Reorganization", "History of the World (Industrial Rev, World Wars, etc.)", "Salient Features of Indian Society & Diversity",
+          "Role of Women & Women's Organization", "Poverty, Population and Developmental Issues", "Effects of Globalization on Indian Society",
+          "Social Empowerment, Communalism, Regionalism", "Salient Features of World's Physical Geography", "Distribution of Key Natural Resources across the world",
+          "Important Geophysical Phenomena (Earthquakes, Tsunami, etc.)"
+        ]
+      },
+      {
+        id: "gs2", name: "GS Paper 2",
+        topics: [
+          "Indian Constitution (Historical underpinnings, evolution)", "Functions & Responsibilities of the Union & States", "Separation of Powers & Dispute Redressal",
+          "Comparison of Indian Constitutional Scheme", "Parliament and State Legislatures", "Structure/Organization of Executive & Judiciary",
+          "Salient Features of Representation of People's Act", "Statutory, Regulatory & Quasi-Judicial Bodies", "Government Policies & Interventions for Development",
+          "Development Processes & the Development Industry (NGOs)", "Welfare Schemes for Vulnerable Sections", "Issues Relating to Health, Education, HR",
+          "Issues relating to Poverty and Hunger", "Important Aspects of Governance, Transparency & Accountability", "Role of Civil Services in a Democracy",
+          "India and its Neighborhood- Relations", "Bilateral, Regional and Global Groupings", "Effect of Policies and Politics of Developed & Developing Countries"
+        ]
+      },
+      {
+        id: "gs3", name: "GS Paper 3",
+        topics: [
+          "Indian Economy & Issues of Planning, Mobilization", "Inclusive Growth and issues arising from it", "Government Budgeting",
+          "Major Crops & Cropping Patterns", "Issues related to Direct & Indirect Farm Subsidies", "Food Processing and Related Industries in India",
+          "Land Reforms in India", "Effects of Liberalization on the Economy", "Infrastructure: Energy, Ports, Roads, Airports, Railways",
+          "Investment Models", "Science & Tech: Developments & Everyday Applications", "Indigenization of Technology & Developing New Tech",
+          "Awareness in IT, Space, Computers, Robotics, Nano-tech", "Conservation, Environmental Pollution & Degradation", "Disaster and Disaster Management",
+          "Linkages between Development & Extremism", "Role of External State & Non-state Actors in Internal Security", "Challenges to Internal Security through Communication Networks",
+          "Security Challenges in Border Areas & Linkages with Organized Crime", "Various Security Forces & Agencies"
+        ]
+      },
+      {
+        id: "gs4", name: "GS Paper 4",
+        topics: [
+          "Ethics and Human Interface", "Human Values: Role of family, society, and institutions", "Attitude: Content, structure, function & its influence",
+          "Aptitude and Foundational Values for Civil Service", "Emotional Intelligence (Concepts & Utilities)", "Contributions of Moral Thinkers & Philosophers",
+          "Public/Civil Service Values and Ethics in Public Admin", "Probity in Governance: Concept of Public Service", "Case Studies on Above Issues"
+        ]
+      },
+      {
+        id: "opt1", name: "History Optional (P1)",
+        topics: [
+          "Sources (Archaeological, Literary, Foreign Accounts)", "Pre-history and Proto-history", "Indus Valley Civilization", "Megalithic Cultures",
+          "Aryans and Vedic Period", "Period of Mahajanapadas", "Mauryan Empire", "Post-Mauryan Period (Indo-Greeks, Sakas, Kushanas)", 
+          "Early State and Society in Eastern India, Deccan, South", "Guptas, Vakatakas and Vardhanas", "Regional States during Gupta Era",
+          "Themes in Early Indian Cultural History", "Early Medieval India (750-1200)", "Cultural Traditions in India (750-1200)", 
+          "The Thirteenth Century", "The Fourteenth Century", "Society, Culture & Economy in 13th/14th Century", "The Fifteenth & Early Sixteenth Century",
+          "The Mughal Empire, First phase (Babur, Humayun)", "The Mughal Empire (Akbar to Aurangzeb)", "Economy and Society in the 16th/17th C.",
+          "Culture during Mughal Empire", "The Eighteenth Century (Decline of Mughal Empire)"
+        ]
+      },
+      {
+        id: "opt2", name: "History Optional (P2)",
+        topics: [
+          "European Penetration into India", "British Expansion in India", "Early Structure of the British Raj", "Economic Impact of British Colonial Rule",
+          "Social and Cultural Developments", "Social and Religious Reform Movements", "Indian Response to British Rule (1857, Peasant & Tribal uprisings)",
+          "Birth of Indian Nationalism", "Rise of Gandhi; Character of Gandhian Nationalism", "Constitutional Developments (1858-1935)",
+          "Other Strands in the National Movement", "Politics of Separatism; the Muslim League", "Consolidation as a Nation (Nehruvian Era)",
+          "Enlightenment and Modern Ideas", "Origins of Modern Politics (Revolutions)", "Industrialization", "Nation-State System",
+          "Imperialism and Colonialism", "Revolution and Counter-Revolution", "World Wars", "The World after World War II", "Liberation from Colonial Rule",
+          "Decolonization and Underdevelopment", "Unification of Europe", "Soviet Disintegration and the Unipolar World"
+        ]
+      }
+    ];
+
+    const getInitialState = () => {
+      const saved = localStorage.getItem("grand_strategy_v2");
+      const parsed = saved ? JSON.parse(saved) : {};
+      
+      return {
+        targetDate: "2026-05-24T00:00:00",
+        sessions: [],
+        tests: [],
+        streak: 0,
+        longestStreak: 0,
+        tacticalRetreat: null,
+        todos: [],
+        rewards: [
+          { id: 1, text: "1 Hr Gaming Session", cost: 50, redeemed: false },
+          { id: 2, text: "Cheat Meal Requisition", cost: 100, redeemed: false }
+        ],
+        points: 0,
+        pomodoros: [],
+        syllabusProgress: {}, 
+        syllabus: DEFAULT_SYLLABUS,
+        ...parsed
+      };
+    };
+
+    // Helper: Dates
+    const todayStr = () => new Date().toISOString().split('T')[0];
+    const getPastDateStr = (daysAgo) => {
+      const d = new Date(); d.setDate(d.getDate() - daysAgo);
+      return d.toISOString().split('T')[0];
+    };
+    
+    const formatCountdown = (ms) => {
+      if (ms <= 0) return { d: "00", h: "00", m: "00", s: "00" };
+      const s = Math.floor(ms / 1000) % 60;
+      const m = Math.floor(ms / 60000) % 60;
+      const h = Math.floor(ms / 3600000) % 24;
+      const d = Math.floor(ms / 86400000);
+      return { d: String(d).padStart(2, "0"), h: String(h).padStart(2, "0"), m: String(m).padStart(2, "0"), s: String(s).padStart(2, "0") };
+    };
+
+    // ─── MAIN APP COMPONENT ───
+    function App() {
+      const [state, setState] = useState(getInitialState);
+      const [tab, setTab] = useState("dashboard");
+      const [now, setNow] = useState(Date.now());
+
+      useEffect(() => {
+        const id = setInterval(() => setNow(Date.now()), 1000);
+        return () => clearInterval(id);
+      }, []);
+
+      useEffect(() => {
+        localStorage.setItem("grand_strategy_v2", JSON.stringify(state));
+      }, [state]);
+
+      const logSession = useCallback((subject, type, hours) => {
+        setState(s => {
+          const newSessions = [...s.sessions, { id: Date.now(), date: todayStr(), subject, type, hours: parseFloat(hours) }];
+          const newTodayHours = newSessions.filter(x => x.date === todayStr()).reduce((a, x) => a + x.hours, 0);
+          const oldTodayHours = s.sessions.filter(x => x.date === todayStr()).reduce((a, x) => a + x.hours, 0);
+          
+          let { streak, longestStreak, tacticalRetreat } = s;
+
+          if (newTodayHours >= DAILY_GOAL && oldTodayHours < DAILY_GOAL) {
+            haptic('success'); // Goal met trigger
+            const yesterday = getPastDateStr(1);
+            const yesterdayHours = s.sessions.filter(x => x.date === yesterday).reduce((a, x) => a + x.hours, 0);
+            if (yesterdayHours >= DAILY_GOAL || streak === 0) {
+              streak += 1;
+              longestStreak = Math.max(streak, longestStreak);
+              tacticalRetreat = null;
+            }
+          } else {
+            haptic('medium'); // Standard log trigger
+          }
+
+          if (tacticalRetreat && newTodayHours >= COUNTER_OFFENSIVE_GOAL) {
+            const windowOk = (Date.now() - tacticalRetreat.startedAt) < RETREAT_WINDOW_HOURS * 3600000;
+            if (windowOk) {
+              haptic('success');
+              streak = tacticalRetreat.streakBefore + 1;
+              longestStreak = Math.max(streak, longestStreak);
+              tacticalRetreat = null;
+            }
+          }
+          
+          const pointsEarned = parseFloat(hours) * 10;
+          return { ...s, sessions: newSessions, streak, longestStreak, tacticalRetreat, points: (s.points || 0) + pointsEarned };
+        });
+      }, []);
+
+      const logTest = (name, type, score, total) => {
+        haptic('medium');
+        setState(s => ({ ...s, tests: [...s.tests, { id: Date.now(), date: todayStr(), name, type, score: parseFloat(score), total: parseFloat(total), percentage: (score/total)*100 }] }));
+      };
+
+      const deleteSession = (id) => { haptic('heavy'); setState(s => ({ ...s, sessions: s.sessions.filter(x => x.id !== id)})); };
+      const deleteTest = (id) => { haptic('heavy'); setState(s => ({ ...s, tests: s.tests.filter(x => x.id !== id)})); };
+      const updateTimeline = (targetDate) => { haptic('success'); setState(s => ({ ...s, targetDate })); };
+
+      const handleTabSwitch = (tId) => {
+        haptic('light');
+        setTab(tId);
+      };
+
+      const TABS = [
+        { id: "dashboard", icon: "⌘", label: "Overview" },
+        { id: "deploy", icon: "⚡", label: "Deploy" },
+        { id: "syllabus", icon: "📚", label: "Syllabus" },
+        { id: "focus", icon: "⏱️", label: "Deep Work" },
+        { id: "planner", icon: "📋", label: "Planner" },
+        { id: "rewards", icon: "🏆", label: "Rewards" },
+        { id: "analytics", icon: "📊", label: "Analytics" },
+        { id: "tests", icon: "🎯", label: "Testing" },
+      ];
+
+      return (
+        <div className="app-layout">
+          {/* Desktop Sidebar */}
+          <aside className="sidebar">
+            <div style={{ marginBottom: 32, display: "flex", alignItems: "center", gap: 10, padding: "0 4px" }}>
+              <div style={{ width: 28, height: 28, background: "var(--text)", borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--bg)", fontWeight: 600, fontSize: 13, flexShrink: 0 }}>G</div>
+              <div className="font-syne" style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.01em", color: "var(--text)" }}>Grand Strategy</div>
+            </div>
+            
+            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {TABS.map(t => (
+                <div key={t.id} className={`nav-item ${tab === t.id ? "active" : ""}`} onClick={() => handleTabSwitch(t.id)}>
+                  <span style={{ fontSize: 18 }}>{t.icon}</span> {t.label}
+                </div>
+              ))}
+            </div>
+          </aside>
+
+          {/* Main Content Area */}
+          <main className="main-content">
+            {tab === "dashboard" && <DashboardView state={state} now={now} updateTimeline={updateTimeline} />}
+            {tab === "deploy" && <DeployView sessions={state.sessions} logSession={logSession} deleteSession={deleteSession} />}
+            {tab === "syllabus" && <SyllabusView state={state} setState={setState} />}
+            {tab === "focus" && <FocusView state={state} setState={setState} />}
+            {tab === "planner" && <PlannerView state={state} setState={setState} />}
+            {tab === "rewards" && <RewardsView state={state} setState={setState} />}
+            {tab === "analytics" && <AnalyticsView sessions={state.sessions} />}
+            {tab === "tests" && <TestsView tests={state.tests} logTest={logTest} deleteTest={deleteTest} />}
+          </main>
+
+          {/* Mobile Bottom Nav */}
+          <nav className="bottom-nav">
+            {TABS.map(t => (
+              <button key={`mob-${t.id}`} className={`tab-btn ${tab === t.id ? "active" : ""}`} onClick={() => handleTabSwitch(t.id)}>
+                <span className="icon">{t.icon}</span>
+                {t.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      );
+    }
+
+    // ─── VIEW 1: DASHBOARD ───
+    function RadialGauge({ value, max, color, size = 120, label, sublabel }) {
+      const r = 44; const cx = 60; const cy = 60;
+      const circ = 2 * Math.PI * r;
+      const pct = Math.min(1, value / max);
+      const dash = pct * circ;
+      const gap = circ - dash;
+      return (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+          <svg width={size} height={size} viewBox="0 0 120 120">
+            <circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--bg3)" strokeWidth="8" />
+            <circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth="8"
+              strokeDasharray={`${dash} ${gap}`} strokeLinecap="round"
+              transform={`rotate(-90 ${cx} ${cy})`}
+              style={{ transition: "stroke-dasharray 1.2s cubic-bezier(0.16, 1, 0.3, 1)" }} />
+            <text x={cx} y={cy - 4} textAnchor="middle" fill="var(--text)" fontSize="18" fontWeight="800" fontFamily="'Syne', sans-serif">{value}</text>
+            <text x={cx} y={cy + 14} textAnchor="middle" fill="var(--text-muted)" fontSize="9" fontWeight="700" fontFamily="'Space Mono', monospace">{sublabel}</text>
+          </svg>
+          <div style={{ fontSize: 10, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700 }}>{label}</div>
+        </div>
+      );
+    }
+
+    function MiniSparkBar({ days, sessions }) {
+      const maxH = Math.max(...days.map(d => sessions.filter(s => s.date === d).reduce((a, s) => a + s.hours, 0)), DAILY_GOAL);
+      return (
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 5, height: 52 }}>
+          {days.map((d, i) => {
+            const h = sessions.filter(s => s.date === d).reduce((a, s) => a + s.hours, 0);
+            const pct = h / maxH;
+            const met = h >= DAILY_GOAL;
+            const isToday = i === 0;
+            return (
+              <div key={d} className="stagger-item" style={{ animationDelay: `${i * 0.05}s`, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 3, height: "100%", justifyContent: "flex-end" }}>
+                <div style={{ width: "100%", height: `${Math.max(4, pct * 100)}%`, background: met ? "var(--success)" : isToday ? "var(--accent)" : "var(--bg3)", borderRadius: "3px 3px 0 0", transition: "height 0.8s cubic-bezier(0.16, 1, 0.3, 1)", opacity: h === 0 ? 0.3 : 1 }} title={`${d}: ${h}h`} />
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    function RadarChart({ data, size = 200 }) {
+      const cx = size / 2, cy = size / 2;
+      const R = size * 0.36;
+      const n = data.length;
+      if (n < 3) return React.createElement('div', {style:{color:"var(--text-dim)",fontSize:12,textAlign:"center",padding:20}}, "Log at least 3 subjects to see the radar.");
+
+      const angleFor = (i) => (Math.PI * 2 * i) / n - Math.PI / 2;
+      const maxVal = Math.max(...data.map(d => d.value), 1);
+
+      const rings = [0.2, 0.4, 0.6, 0.8, 1.0];
+      const ringPoints = (pct) => data.map((_, i) => {
+        const a = angleFor(i); const r = R * pct;
+        return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
+      }).join(" ");
+
+      const dataPoints = data.map((d, i) => {
+        const pct = d.value / maxVal;
+        const a = angleFor(i);
+        return `${cx + R * pct * Math.cos(a)},${cy + R * pct * Math.sin(a)}`;
+      }).join(" ");
+
+      const labelR = R + 20;
+
+      return (
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{overflow:"visible"}}>
+          {rings.map((pct, i) => (
+            <polygon key={i} points={ringPoints(pct)}
+              fill={pct === 1 ? "rgba(0,0,0,0.02)" : "none"}
+              stroke="var(--border)" strokeWidth={pct === 1 ? 1.5 : 1} />
+          ))}
+          {data.map((_, i) => {
+            const a = angleFor(i);
+            return <line key={i} x1={cx} y1={cy} x2={cx + R * Math.cos(a)} y2={cy + R * Math.sin(a)} stroke="var(--border)" strokeWidth={1} />;
+          })}
+          <polygon points={dataPoints} fill="var(--accent-soft)" stroke="var(--accent)" strokeWidth={2} strokeLinejoin="round" style={{transition: "all 0.5s ease"}} />
+          {data.map((d, i) => {
+            const pct = d.value / maxVal;
+            const a = angleFor(i);
+            return <circle key={i} cx={cx + R * pct * Math.cos(a)} cy={cy + R * pct * Math.sin(a)} r={4} fill="var(--accent)" stroke="var(--bg2)" strokeWidth={1.5} style={{transition: "all 0.5s ease"}} />;
+          })}
+          {data.map((d, i) => {
+            const a = angleFor(i);
+            const lx = cx + labelR * Math.cos(a);
+            const ly = cy + labelR * Math.sin(a);
+            const anchor = Math.cos(a) > 0.15 ? "start" : Math.cos(a) < -0.15 ? "end" : "middle";
+            const short = d.label.split(" ")[0];
+            return (
+              <text key={i} x={lx} y={ly} textAnchor={anchor} dominantBaseline="middle"
+                fill={d.value === maxVal ? "var(--accent)" : "rgba(240,237,232,0.55)"}
+                fontSize="9" fontWeight="700" fontFamily="Space Mono, monospace">{short}</text>
+            );
+          })}
+        </svg>
+      );
+    }
+
+    function DashboardView({ state, now, updateTimeline }) {
+      const [isEditingDate, setIsEditingDate] = useState(false);
+      const [tempTarget, setTempTarget] = useState(state.targetDate.split('T')[0]);
+
+      const hour = new Date(now).getHours();
+      let greeting = "Good Evening", greetIcon = "🌙";
+      if (hour < 12) { greeting = "Good Morning"; greetIcon = "☀️"; }
+      else if (hour < 17) { greeting = "Good Afternoon"; greetIcon = "⚡"; }
+
+      const targetDateObj = new Date(state.targetDate);
+      const msLeft = Math.max(0, targetDateObj - now);
+      const countdown = formatCountdown(msLeft);
+      const totalDays = Math.ceil((targetDateObj - new Date("2025-01-01")) / 86400000);
+      const daysElapsed = totalDays - Math.ceil(msLeft / 86400000);
+      const campaignPct = Math.min(100, Math.max(0, Math.round((daysElapsed / totalDays) * 100)));
+      
+      const last7Days = Array.from({length: 7}, (_, i) => getPastDateStr(i));
+      const last14Days = Array.from({length: 14}, (_, i) => getPastDateStr(i));
+      const weeklySessions = state.sessions.filter(s => last7Days.includes(s.date));
+      const weeklyHours = weeklySessions.reduce((a, s) => a + s.hours, 0);
+      const weeklyTarget = 7 * DAILY_GOAL;
+      const weeklyProgress = Math.min(1, weeklyHours / weeklyTarget);
+      const totalHours = state.sessions.reduce((a, s) => a + s.hours, 0);
+      const todayHours = state.sessions.filter(s => s.date === last7Days[0]).reduce((a, s) => a + s.hours, 0);
+
+      const subjectHours = {};
+      state.sessions.forEach(s => { subjectHours[s.subject] = (subjectHours[s.subject] || 0) + s.hours; });
+      const topSubjects = Object.entries(subjectHours).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      const subjectColors = ["var(--accent)","var(--success)","#60A5FA","#F472B6","#A78BFA","var(--warning)"];
+
+      let primaryFocus = "None"; let maxHrs = 0;
+      for (const [sub, hrs] of Object.entries(subjectHours)) { if (hrs > maxHrs) { primaryFocus = sub; maxHrs = hrs; } }
+
+      const weeklyScore = Math.min(50, (weeklyHours / weeklyTarget) * 50);
+      const streakScore = Math.min(50, (state.streak / 14) * 50); 
+      const disciplineScore = Math.round(weeklyScore + streakScore) || 0;
+      let readinessStatus = "CRITICAL"; let readinessColor = "var(--danger)"; 
+      if (disciplineScore >= 80) { readinessStatus = "OPTIMAL"; readinessColor = "var(--success)"; }
+      else if (disciplineScore >= 50) { readinessStatus = "NOMINAL"; readinessColor = "var(--accent)"; }
+
+      const allTopics = state.syllabus.reduce((a, p) => a + p.topics.length, 0);
+      const doneTopics = Object.values(state.syllabusProgress).filter(v => v === 3).length;
+      const syllPct = allTopics > 0 ? Math.round((doneTopics / allTopics) * 100) : 0;
+
+      const daysMet = last14Days.filter(d => state.sessions.filter(s => s.date === d).reduce((a, s) => a + s.hours, 0) >= DAILY_GOAL).length;
+      const avgTest = state.tests.length ? (state.tests.reduce((a, t) => a + t.percentage, 0) / state.tests.length).toFixed(1) : null;
+
+      const radarData = SUBJECTS.map(sub => ({
+        label: sub,
+        value: subjectHours[sub] || 0
+      })).filter(d => d.value > 0);
+
+      return (
+        <div className="animate-in">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 28 }}>
+            <div>
+              <span className="subtitle">{greetIcon} {greeting}, Commander</span>
+              <h1 className="title" style={{ fontSize: 32 }}>Theater Overview</h1>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div className="subtitle" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 8, marginBottom: 8 }}>
+                {msLeft > 0 ? "EXAM COUNTDOWN" : "CAMPAIGN COMPLETE"}
+                <button onClick={() => { setIsEditingDate(!isEditingDate); haptic('light'); }} style={{ background: 'var(--bg2)', border: '1px solid var(--border)', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 9, padding: "2px 6px", borderRadius: "4px", transition: "transform 0.2s" }}>EDIT</button>
+              </div>
+              <div style={{ display: "flex", gap: 16, background: "var(--bg2)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 16px" }}>
+                {[["d", "DAYS"], ["h", "HRS"], ["m", "MIN"], ["s", "SEC"]].map(([k, label]) => (
+                  <div key={k} style={{ textAlign: "center", minWidth: 36 }}>
+                    <div className="font-syne" style={{ fontSize: 26, fontWeight: 800, color: msLeft < 86400000 * 7 ? "var(--danger)" : "var(--text)", lineHeight: 1 }}>{countdown[k]}</div>
+                    <div style={{ fontSize: 8, color: "var(--text-dim)", fontWeight: 700, marginTop: 4 }}>{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {isEditingDate && (
+            <div className="card animate-in" style={{ display: "flex", gap: 16, alignItems: "flex-end", marginBottom: 24 }}>
+              <div style={{ flex: 1 }}>
+                <label className="subtitle" style={{ display: "block", marginBottom: 8 }}>Target Date</label>
+                <input type="date" className="input-base font-mono" value={tempTarget} onChange={e => { setTempTarget(e.target.value); haptic('tick'); }} />
+              </div>
+              <button className="btn primary" style={{ width: "auto" }} onClick={() => { updateTimeline(`${tempTarget}T00:00:00`); setIsEditingDate(false); }}>Save</button>
+            </div>
+          )}
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 20 }}>
+            {[
+              { icon: "🔥", label: "Active Streak", value: `${state.streak}d`, sub: "consecutive days", color: "var(--accent)" },
+              { icon: "🏆", label: "Best Streak", value: `${state.longestStreak}d`, sub: "all-time record", color: "var(--success)" },
+              { icon: "⚡", label: "Today's Hours", value: `${todayHours.toFixed(1)}h`, sub: `Goal: ${DAILY_GOAL}h`, color: todayHours >= DAILY_GOAL ? "var(--success)" : "var(--accent)" },
+              { icon: "📈", label: "Total Hours", value: `${totalHours.toFixed(0)}h`, sub: `${state.sessions.length} sessions`, color: "#60A5FA" },
+            ].map((s, i) => (
+              <div key={i} className="card stagger-item" style={{ animationDelay: `${i * 0.1}s`, padding: "18px 20px", marginBottom: 0, position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", top: 12, right: 14, fontSize: 22, opacity: 0.15 }}>{s.icon}</div>
+                <div style={{ fontSize: 10, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 700, marginBottom: 8 }}>{s.label}</div>
+                <div className="font-syne" style={{ fontSize: 28, fontWeight: 800, color: s.color, lineHeight: 1, marginBottom: 4 }}>{s.value}</div>
+                <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{s.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 20, marginBottom: 20 }}>
+            <div className="card stagger-item" style={{ animationDelay: "0.4s", marginBottom: 0 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                <span className="subtitle" style={{ margin: 0 }}>⚙️ Live Diagnostics</span>
+                <div style={{ fontSize: 9, background: "var(--bg2)", border: "1px solid var(--border)", padding: "4px 8px", borderRadius: 6, color: "var(--text-muted)", fontWeight: 700 }}>LAST 7 DAYS</div>
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", marginBottom: 20, paddingBottom: 20, borderBottom: "1px solid var(--border)" }}>
+                <RadialGauge value={disciplineScore} max={100} color={readinessColor} size={110} label="Discipline" sublabel={readinessStatus} />
+                <RadialGauge value={Math.round(weeklyProgress * 100)} max={100} color="var(--accent)" size={110} label="Weekly Target" sublabel={`${weeklyHours.toFixed(0)}/${weeklyTarget}h`} />
+                <RadialGauge value={syllPct} max={100} color="#60A5FA" size={110} label="Syllabus Done" sublabel={`${doneTopics}/${allTopics}`} />
+              </div>
+
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                  <span style={{ fontSize: 10, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700 }}>7-Day Activity</span>
+                  <span style={{ fontSize: 10, color: "var(--text-dim)" }}>{daysMet}/7 goals met</span>
+                </div>
+                <MiniSparkBar days={last7Days.slice().reverse()} sessions={state.sessions} />
+                <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6 }}>
+                  {last7Days.slice().reverse().map((d, i) => {
+                    const h = state.sessions.filter(s => s.date === d).reduce((a, s) => a + s.hours, 0);
+                    const met = h >= DAILY_GOAL;
+                    return <div key={d} style={{ flex: 1, textAlign: "center", fontSize: 8, color: met ? "var(--success)" : "var(--text-dim)", fontFamily: "'Space Mono', monospace" }}>{new Date(d+'T12:00:00').toLocaleDateString('en',{weekday:'narrow'})}</div>;
+                  })}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 16, padding: "12px 16px", background: "var(--bg2)", borderRadius: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700 }}>Today's Mission</span>
+                  <span className="font-mono" style={{ fontSize: 11, color: todayHours >= DAILY_GOAL ? "var(--success)" : "var(--accent)" }}>{todayHours.toFixed(1)} / {DAILY_GOAL}h</span>
+                </div>
+                <div style={{ height: 8, background: "var(--bg2)", borderRadius: 99, overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: `${Math.min(100, (todayHours / DAILY_GOAL) * 100)}%`, background: todayHours >= DAILY_GOAL ? "var(--success)" : "var(--accent)", borderRadius: 99, transition: "width 1.2s cubic-bezier(0.16, 1, 0.3, 1)" }} />
+                </div>
+                {todayHours >= DAILY_GOAL && <div style={{ fontSize: 10, color: "var(--success)", marginTop: 6, fontWeight: 700 }}>✓ Daily goal achieved!</div>}
+              </div>
+            </div>
+
+            <div className="card stagger-item" style={{ animationDelay: "0.5s", marginBottom: 0 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                <span className="subtitle" style={{ margin: 0 }}>🕸️ Subject Coverage</span>
+                <span style={{ fontSize: 9, color: "var(--text-dim)", fontFamily: "Space Mono, monospace" }}>ALL-TIME HOURS</span>
+              </div>
+              {radarData.length < 3 ? (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: 200, gap: 10, color: "var(--text-dim)", fontSize: 12, textAlign: "center" }}>
+                  <span style={{ fontSize: 28 }}>🕸️</span>
+                  Log sessions in 3+ subjects to see your coverage web.
+                </div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                  <RadarChart data={radarData} size={190} />
+                  <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 5 }}>
+                    {radarData.slice(0, 5).map((d, i) => {
+                      const pct = Math.round((d.value / (totalHours || 1)) * 100);
+                      return (
+                        <div key={d.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                          <div style={{ width: 7, height: 7, borderRadius: 2, background: subjectColors[i % subjectColors.length], flexShrink: 0 }} />
+                          <div style={{ fontSize: 10, flex: 1, color: "var(--text-muted)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{d.label}</div>
+                          <div style={{ fontSize: 10, fontFamily: "Space Mono, monospace", color: "var(--text)", flexShrink: 0 }}>{d.value.toFixed(1)}h</div>
+                          <div style={{ fontSize: 10, color: "var(--text-dim)", width: 28, textAlign: "right", flexShrink: 0 }}>{pct}%</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="card stagger-item" style={{ animationDelay: "0.6s", marginBottom: 20, background: "linear-gradient(135deg, var(--bg2) 60%, var(--accent-soft))", borderColor: "var(--accent-soft)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+              <div>
+                <span className="subtitle" style={{ margin: 0 }}>🗺️ Campaign Progress</span>
+                <div style={{ fontSize: 13, color: "var(--text-muted)", marginTop: 4 }}>UPSC CSE 2026 · Prelims</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div className="font-syne" style={{ fontSize: 22, fontWeight: 800, color: "var(--accent)" }}>{campaignPct}%</div>
+                <div style={{ fontSize: 10, color: "var(--text-dim)" }}>time elapsed</div>
+              </div>
+            </div>
+            <div style={{ position: "relative", height: 10, background: "var(--bg2)", borderRadius: 99, overflow: "hidden" }}>
+              <div style={{ height: "100%", width: `${campaignPct}%`, background: "linear-gradient(90deg, var(--accent) 0%, var(--accent) 100%)", borderRadius: 99, transition: "width 1.2s cubic-bezier(0.16, 1, 0.3, 1)" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
+              <span style={{ fontSize: 9, color: "var(--text-dim)" }}>JAN 2025</span>
+              <span style={{ fontSize: 9, color: "var(--accent)", fontWeight: 700 }}>► NOW</span>
+              <span style={{ fontSize: 9, color: "var(--text-dim)" }}>TARGET DATE</span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+            <h2 className="font-syne" style={{ fontSize: 16, fontWeight: 700 }}>Recent Operations</h2>
+            <span style={{ fontSize: 10, color: "var(--text-dim)" }}>LAST {Math.min(5, state.sessions.length)} ENTRIES</span>
+          </div>
+          <div className="card stagger-item" style={{ animationDelay: "0.7s", padding: "8px 20px" }}>
+            {state.sessions.length === 0 && <div style={{ color: "var(--text-dim)", fontSize: 13, padding: "12px 0" }}>No deployments yet. Head to Deploy to log your first session.</div>}
+            {state.sessions.slice(-5).reverse().map((s, i) => {
+              const subjIdx = SUBJECTS.indexOf(s.subject) % subjectColors.length;
+              return (
+                <div key={s.id} className="stagger-item" style={{ animationDelay: `${i * 0.1 + 0.7}s`, display: "flex", alignItems: "center", gap: 14, padding: "12px 0", borderBottom: i < Math.min(4, state.sessions.length - 1) ? "1px solid var(--border)" : "none" }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 8, background: subjectColors[Math.max(0, subjIdx)], display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: 0.85 }}>
+                    <span style={{ fontSize: 16 }}>{["📖","🗺️","⚖️","💹","🔬","🌿","🧮","📰","✍️"][SUBJECTS.indexOf(s.subject)] || "📚"}</span>
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontWeight: 600, color: "var(--text)", fontSize: 14, marginBottom: 2 }}>{s.subject}</div>
+                    <div style={{ fontSize: 11, color: "var(--text-dim)" }}>{s.type || "General"} · {s.date}</div>
+                  </div>
+                  <div style={{ textAlign: "right", flexShrink: 0 }}>
+                    <div className="font-mono" style={{ fontWeight: 700, color: "var(--accent)", fontSize: 15 }}>+{s.hours}h</div>
+                    <div style={{ fontSize: 10, color: "var(--text-dim)", marginTop: 1 }}>{Math.round(s.hours * 10)} pts</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+
+    // ─── VIEW 2: DEPLOY (LOGGING) ───
+    function DeployView({ sessions, logSession, deleteSession }) {
+      const [subject, setSubject] = useState(SUBJECTS[0]);
+      const [deployType, setDeployType] = useState(DEPLOYMENT_TYPES[0]);
+      const [hours, setHours] = useState(1);
+
+      const handleLog = () => {
+        if (hours > 0) {
+          logSession(subject, deployType, hours);
+        } else {
+          haptic('error');
+        }
+      };
+
+      const todayHours = sessions.filter(s => s.date === todayStr()).reduce((a, b) => a + b.hours, 0);
+      const ratingRaw = Math.min(100, Math.round((todayHours / DAILY_GOAL) * 100));
+      
+      let rank = "D"; let rankColor = "var(--text-muted)";
+      if (ratingRaw >= 100) { rank = "S"; rankColor = "var(--success)"; }
+      else if (ratingRaw >= 80) { rank = "A"; rankColor = "var(--accent)"; }
+      else if (ratingRaw >= 60) { rank = "B"; rankColor = "var(--warning)"; }
+      else if (ratingRaw >= 40) { rank = "C"; rankColor = "var(--danger)"; }
+
+      return (
+        <div className="animate-in">
+          <span className="subtitle">Resource Allocation</span>
+          <h1 className="title">Deploy Hours</h1>
+
+          <div className="grid-2" style={{ marginTop: 32 }}>
+            <div className="card">
+              <div style={{ marginBottom: 20 }}>
+                <label className="subtitle" style={{ display: "block", marginBottom: 8 }}>Target Sector (Subject)</label>
+                <select className="input-base" value={subject} onChange={e => { setSubject(e.target.value); haptic('tick'); }}>
+                  {SUBJECTS.map(s => <option key={s}>{s}</option>)}
+                </select>
+              </div>
+              <div style={{ marginBottom: 20 }}>
+                <label className="subtitle" style={{ display: "block", marginBottom: 8 }}>Operation Type</label>
+                <select className="input-base" value={deployType} onChange={e => { setDeployType(e.target.value); haptic('tick'); }}>
+                  {DEPLOYMENT_TYPES.map(t => <option key={t}>{t}</option>)}
+                </select>
+              </div>
+              <div style={{ marginBottom: 24 }}>
+                <label className="subtitle" style={{ display: "block", marginBottom: 8 }}>Duration (Hours)</label>
+                <input type="number" className="input-base font-mono" step="0.5" min="0.5" value={hours} onChange={e => { setHours(e.target.value); haptic('tick'); }} />
+              </div>
+              <button className="btn primary" onClick={handleLog}>Execute Deployment</button>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <div className="card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 32px", marginBottom: 0 }}>
+                <div>
+                  <span className="subtitle" style={{ marginBottom: 4 }}>Daily Discipline</span>
+                  <div style={{ fontSize: 13, color: "var(--text-dim)" }}>Target: {DAILY_GOAL}h</div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+                  <div style={{ textAlign: "right" }}>
+                    <div className="font-mono" style={{ fontSize: 24, fontWeight: 700, color: "var(--text)" }}>{ratingRaw}%</div>
+                    <div style={{ fontSize: 11, color: "var(--text-dim)" }}>Completion</div>
+                  </div>
+                  <div className="font-syne" style={{ fontSize: 48, fontWeight: 800, color: rankColor, lineHeight: 1 }}>{rank}</div>
+                </div>
+              </div>
+
+              <div className="card" style={{ flex: 1, maxHeight: "300px", overflowY: "auto", marginBottom: 0 }}>
+                <span className="subtitle">Deployment Ledger</span>
+                {sessions.slice().reverse().map((s, i) => (
+                  <div key={s.id} className="stagger-item" style={{ animationDelay: `${i * 0.05}s`, display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--bg2)", padding: "12px 16px", borderRadius: 8, marginBottom: 8 }}>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 600 }}>{s.subject}</div>
+                      <div style={{ fontSize: 10, color: "var(--text-dim)", marginTop: 2 }}>{s.type || "General"}</div>
+                      <div className="font-mono" style={{ fontSize: 10, color: "var(--text-dim)", marginTop: 2 }}>{s.date}</div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                      <span className="font-mono" style={{ color: "var(--accent)", fontWeight: 700 }}>{s.hours}h</span>
+                      <button onClick={() => deleteSession(s.id)} className="action-btn delete" style={{ background: "none", border: "none", color: "var(--danger)", cursor: "pointer", fontSize: 14 }}>✕</button>
+                    </div>
+                  </div>
+                ))}
+                {sessions.length === 0 && <div style={{ color: "var(--text-dim)", fontSize: 13 }}>No deployments yet.</div>}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ─── VIEW 3: SYLLABUS TRACKER ───
+    function SyllabusView({ state, setState }) {
+      const safeSyllabus = state.syllabus || [];
+      const [activePaper, setActivePaper] = useState(safeSyllabus.length > 0 ? safeSyllabus[0].id : null);
+      
+      const [editingTopic, setEditingTopic] = useState(null);
+      const [editValue, setEditValue] = useState("");
+      const [newTopic, setNewTopic] = useState("");
+
+      const currentPaperData = safeSyllabus.find(p => p.id === activePaper);
+      const progressMap = state.syllabusProgress || {};
+
+      const updateProgress = (topicName, level) => {
+        haptic('light');
+        setState(s => ({
+          ...s,
+          syllabusProgress: {
+            ...(s.syllabusProgress || {}),
+            [topicName]: level
+          }
+        }));
+      };
+
+      const handleAddTopic = () => {
+        if (!newTopic.trim()) { haptic('error'); return; }
+        haptic('medium');
+        setState(s => {
+          const updatedSyllabus = s.syllabus.map(p => {
+            if (p.id === activePaper) return { ...p, topics: [...p.topics, newTopic] };
+            return p;
+          });
+          return { ...s, syllabus: updatedSyllabus };
+        });
+        setNewTopic("");
+      };
+
+      const startEdit = (topic) => {
+        haptic('light');
+        setEditingTopic(topic);
+        setEditValue(topic);
+      };
+
+      const handleSaveEdit = (oldTopicName) => {
+        if (!editValue.trim() || editValue === oldTopicName) {
+          setEditingTopic(null);
+          return;
+        }
+        haptic('success');
+        setState(s => {
+          const updatedSyllabus = s.syllabus.map(p => {
+            if (p.id === activePaper) {
+               return { ...p, topics: p.topics.map(t => t === oldTopicName ? editValue : t) };
+            }
+            return p;
+          });
+          
+          const newProgress = { ...s.syllabusProgress };
+          if (newProgress[oldTopicName] !== undefined) {
+             newProgress[editValue] = newProgress[oldTopicName];
+             delete newProgress[oldTopicName];
+          }
+
+          return { ...s, syllabus: updatedSyllabus, syllabusProgress: newProgress };
+        });
+        setEditingTopic(null);
+      };
+
+      const handleDeleteTopic = (topicName) => {
+        haptic('medium');
+        if(!confirm("Are you sure you want to delete this topic?")) return;
+        haptic('heavy');
+        setState(s => {
+          const updatedSyllabus = s.syllabus.map(p => {
+             if (p.id === activePaper) return { ...p, topics: p.topics.filter(t => t !== topicName) };
+             return p;
+          });
+          return { ...s, syllabus: updatedSyllabus };
+        });
+      };
+
+      if (!currentPaperData) return null;
+
+      const totalTopics = currentPaperData.topics.length;
+      const scores = currentPaperData.topics.map(t => progressMap[t] || 0);
+      const maxScore = totalTopics * 3;
+      const currentScore = scores.reduce((a,b)=>a+b, 0);
+      const paperPercent = maxScore > 0 ? ((currentScore / maxScore) * 100).toFixed(0) : 0;
+
+      return (
+        <div className="animate-in">
+          <span className="subtitle">Intelligence Map</span>
+          <h1 className="title">Syllabus Matrix</h1>
+          
+          <div className="paper-tabs" style={{ marginTop: 24 }}>
+            {safeSyllabus.map(p => (
+              <button key={p.id} className={`paper-tab ${activePaper === p.id ? 'active' : ''}`} onClick={() => { setActivePaper(p.id); setEditingTopic(null); haptic('light'); }}>
+                {p.name}
+              </button>
+            ))}
+          </div>
+
+          <div className="card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 24px" }}>
+            <div>
+              <div style={{ fontSize: 18, fontWeight: 700, fontFamily: "'Syne', sans-serif" }}>{currentPaperData.name} Preparedness</div>
+              <div style={{ fontSize: 12, color: "var(--text-dim)", marginTop: 4 }}>Track tactical readiness level across all topics. Edit, delete, or add custom topics below.</div>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div className="font-mono" style={{ fontSize: 24, fontWeight: 700, color: "var(--accent)" }}>{paperPercent}%</div>
+              <div style={{ fontSize: 10, color: "var(--text-dim)", textTransform: "uppercase", fontWeight: 700 }}>Completion</div>
+            </div>
+          </div>
+
+          <div className="card" style={{ padding: "16px 24px" }}>
+            {currentPaperData.topics.map((topic, i) => {
+              const lvl = progressMap[topic] || 0;
+              const isEditing = editingTopic === topic;
+
+              return (
+                <div key={`${i}-${topic}`} className="topic-row stagger-item" style={{ animationDelay: `${Math.min(i, 20) * 0.03}s`, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0", borderBottom: "1px solid var(--border)" }}>
+                  
+                  {isEditing ? (
+                    <div style={{ flex: 1, display: "flex", gap: 12, paddingRight: 20 }}>
+                      <input className="input-base" style={{ padding: "8px 12px", margin: 0 }} value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSaveEdit(topic)} autoFocus />
+                      <button className="btn primary" style={{ width: "auto", padding: "8px 16px" }} onClick={() => handleSaveEdit(topic)}>Save</button>
+                      <button className="btn" style={{ width: "auto", padding: "8px 16px" }} onClick={() => setEditingTopic(null)}>Cancel</button>
+                    </div>
+                  ) : (
+                    <div style={{ flex: 1, paddingRight: 20, fontSize: 14, lineHeight: 1.5, color: lvl > 0 ? "var(--text)" : "var(--text-dim)", display: "flex", alignItems: "center" }}>
+                      {topic}
+                      <div className="topic-controls">
+                        <button className="action-btn" title="Edit" onClick={() => startEdit(topic)}>✏️</button>
+                        <button className="action-btn delete" title="Delete" onClick={() => handleDeleteTopic(topic)}>🗑️</button>
+                      </div>
+                    </div>
+                  )}
+
+                  {!isEditing && (
+                    <div style={{ display: "flex", gap: 6 }}>
+                      <button className={`prep-btn lvl-0 ${lvl === 0 ? 'active' : ''}`} onClick={() => updateProgress(topic, 0)}>None</button>
+                      <button className={`prep-btn lvl-1 ${lvl === 1 ? 'active' : ''}`} onClick={() => updateProgress(topic, 1)}>Low</button>
+                      <button className={`prep-btn lvl-2 ${lvl === 2 ? 'active' : ''}`} onClick={() => updateProgress(topic, 2)}>Med</button>
+                      <button className={`prep-btn lvl-3 ${lvl === 3 ? 'active' : ''}`} onClick={() => updateProgress(topic, 3)}>High</button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            
+            <div style={{ display: "flex", gap: 12, marginTop: 24, paddingTop: 8 }}>
+              <input className="input-base" placeholder="Add custom topic to this paper..." value={newTopic} onChange={e=>{setNewTopic(e.target.value); haptic('tick');}} onKeyDown={e=>e.key==='Enter'&&handleAddTopic()} />
+              <button className="btn" style={{ width: "auto", padding: "12px 24px", background: "var(--hover)" }} onClick={handleAddTopic}>Add Topic</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ─── VIEW 4: DEEP WORK (POMODORO) ───
+    function FocusView({ state, setState }) {
+      const [timeLeft, setTimeLeft] = useState(25 * 60);
+      const [isActive, setIsActive] = useState(false);
+      const [isWork, setIsWork] = useState(true);
+      const [audioCtx, setAudioCtx] = useState(null);
+      const [noiseNode, setNoiseNode] = useState(null);
+      const [isPlayingNoise, setIsPlayingNoise] = useState(false);
+      const [isFullscreen, setIsFullscreen] = useState(false);
+
+      useEffect(() => {
+        const handleFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement);
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      }, []);
+
+      const toggleFullscreen = () => {
+        haptic('medium');
+        const elem = document.getElementById("focus-container");
+        if (!document.fullscreenElement) {
+          elem.requestFullscreen().catch(err => console.log(err));
+        } else {
+          document.exitFullscreen();
+        }
+      };
+
+      useEffect(() => {
+        let interval = null;
+        if (isActive && timeLeft > 0) {
+          interval = setInterval(() => setTimeLeft(t => t - 1), 1000);
+        } else if (isActive && timeLeft === 0) {
+          clearInterval(interval);
+          setIsActive(false);
+          haptic('success');
+          if (isWork) {
+            setState(s => ({
+              ...s,
+              pomodoros: [...(s.pomodoros || []), { id: Date.now(), date: todayStr() }]
+            }));
+            alert("Deep work session complete! Take a breather, Commander.");
+            setMode(false);
+          } else {
+             alert("Break over. Back to the frontlines!");
+             setMode(true);
+          }
+        }
+        return () => clearInterval(interval);
+      }, [isActive, timeLeft, isWork, setState]);
+
+      const setMode = (work) => {
+        haptic('light');
+        setIsWork(work);
+        setTimeLeft(work ? 25 * 60 : 5 * 60);
+        setIsActive(false);
+      };
+
+      const formatTime = (seconds) => {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      };
+
+      const toggleNoise = () => {
+        haptic('light');
+        if (isPlayingNoise && noiseNode) {
+          noiseNode.stop();
+          noiseNode.disconnect();
+          setNoiseNode(null);
+          setIsPlayingNoise(false);
+        } else {
+          const ctx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+          if (!audioCtx) setAudioCtx(ctx);
+          
+          const bufferSize = ctx.sampleRate * 2;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const output = buffer.getChannelData(0);
+          let lastOut = 0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            output[i] = (lastOut + (0.02 * white)) / 1.02;
+            lastOut = output[i];
+            output[i] *= 3.5;
+          }
+          const node = ctx.createBufferSource();
+          node.buffer = buffer;
+          node.loop = true;
+          
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.value = 400; 
+          
+          node.connect(filter);
+          filter.connect(ctx.destination);
+          node.start();
+          
+          setNoiseNode(node);
+          setIsPlayingNoise(true);
+        }
+      };
+      
+      useEffect(() => {
+        return () => {
+          if (noiseNode) {
+            noiseNode.stop();
+            noiseNode.disconnect();
+          }
+        };
+      }, [noiseNode]);
+
+      const todaysPomodoros = (state.pomodoros || []).filter(p => p.date === todayStr()).length;
+
+      return (
+        <div className="animate-in" id="focus-container" style={{ 
+          background: isFullscreen ? 'var(--bg)' : 'transparent',
+          height: isFullscreen ? '100vh' : 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: isFullscreen ? 'center' : 'flex-start',
+          alignItems: isFullscreen ? 'center' : 'stretch',
+          padding: isFullscreen ? '20px' : '0',
+          transition: 'all 0.5s ease'
+        }}>
+          {!isFullscreen && (
+            <div style={{ marginBottom: 32 }}>
+              <span className="subtitle">Hyperfocus Protocol</span>
+              <h1 className="title">Deep Work Center</h1>
+            </div>
+          )}
+
+          <div className="card" style={{ 
+            marginTop: isFullscreen ? 0 : 0, 
+            textAlign: 'center', 
+            padding: isFullscreen ? '60px 40px' : '40px',
+            maxWidth: isFullscreen ? '600px' : '100%',
+            width: '100%',
+            border: isFullscreen ? 'none' : '1px solid var(--border)',
+            background: isFullscreen ? 'transparent' : 'var(--bg2)',
+          }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 32 }}>
+              <button className="btn" style={{ width: "auto", background: isWork ? "var(--hover)" : "transparent", color: isWork ? "var(--accent)" : "var(--text-dim)" }} onClick={() => setMode(true)}>Focus (25m)</button>
+              <button className="btn" style={{ width: "auto", background: !isWork ? "var(--hover)" : "transparent", color: !isWork ? "var(--success)" : "var(--text-dim)" }} onClick={() => setMode(false)}>Break (5m)</button>
+            </div>
+
+            <div className="font-mono" style={{ fontSize: isFullscreen ? 140 : 80, fontWeight: 700, color: isWork ? "var(--accent)" : "var(--success)", lineHeight: 1, marginBottom: 32, transition: 'all 0.5s ease', textShadow: isActive ? `0 0 20px ${isWork ? 'var(--accent-soft)' : 'rgba(74,222,128,0.4)'}` : 'none' }}>
+              {formatTime(timeLeft)}
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 40 }}>
+              <button className="btn primary" style={{ width: "120px" }} onClick={() => { setIsActive(!isActive); haptic('medium'); }}>
+                {isActive ? "PAUSE" : "START"}
+              </button>
+              <button className="btn" style={{ width: "120px" }} onClick={() => { setIsActive(false); setTimeLeft(isWork ? 25*60 : 5*60); haptic('light'); }}>
+                RESET
+              </button>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "center", gap: 24, paddingTop: 24, borderTop: "1px solid var(--border)" }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", opacity: isPlayingNoise ? 1 : 0.5, transition: "all 0.2s" }} onClick={toggleNoise}>
+                <div style={{ width: 48, height: 48, borderRadius: "50%", background: isPlayingNoise ? "var(--accent-soft)" : "var(--bg2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, transition: "all 0.2s" }}>
+                  🎧
+                </div>
+                <span style={{ fontSize: 10, color: "var(--text-dim)", fontWeight: 700, textTransform: "uppercase" }}>Ambient</span>
+              </div>
+              
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.2s" }} onClick={toggleFullscreen}>
+                <div style={{ width: 48, height: 48, borderRadius: "50%", background: "var(--bg2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, transition: "all 0.2s" }}>
+                  ⛶
+                </div>
+                <span style={{ fontSize: 10, color: "var(--text-dim)", fontWeight: 700, textTransform: "uppercase" }}>Fullscreen</span>
+              </div>
+            </div>
+          </div>
+
+          {!isFullscreen && (
+            <div className="grid-2">
+               <div className="card" style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                 <div style={{ fontSize: 40, animation: isActive ? "celebratePop 2s infinite" : "none" }}>🔥</div>
+                 <div>
+                   <div className="subtitle" style={{ marginBottom: 4 }}>Daily Focus Streak</div>
+                   <div className="font-syne" style={{ fontSize: 32, fontWeight: 800, color: "var(--accent)" }}>{todaysPomodoros} <span style={{ fontSize: 14, color: "var(--text-dim)", fontWeight: "normal", fontFamily: "'DM Sans', sans-serif" }}>Sessions</span></div>
+                 </div>
+               </div>
+               <div className="card">
+                 <span className="subtitle">Deep Work Doctrine</span>
+                 <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>
+                   True strategic advantage is forged in uninterrupted silence. Engage the hyperfocus protocol to isolate your objective. Let the ambient low-pass hum block out tactical noise. Each 25-minute engagement brings you closer to ultimate victory.
+                 </p>
+               </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // ─── VIEW 5: PLANNER (STANDALONE) ───
+    function PlannerView({ state, setState }) {
+      const [newTodo, setNewTodo] = useState("");
+
+      const handleAddTodo = () => {
+        if (!newTodo) { haptic('error'); return; }
+        haptic('light');
+        setState(s => ({ ...s, todos: [...(s.todos || []), { id: Date.now(), text: newTodo, done: false }] }));
+        setNewTodo("");
+      };
+
+      const toggleTodo = (id) => {
+        setState(s => {
+          const targetTodo = s.todos.find(t => t.id === id);
+          if (targetTodo && !targetTodo.done) haptic('medium'); 
+          else haptic('light');
+          
+          const todos = (s.todos || []).map(t => t.id === id ? { ...t, done: !t.done } : t);
+          let points = s.points || 0;
+          if (targetTodo && !targetTodo.done) points += 5; 
+          else if (targetTodo && targetTodo.done) points -= 5; 
+
+          return { ...s, todos, points };
+        });
+      };
+
+      return (
+        <div className="animate-in">
+          <span className="subtitle">Task Management</span>
+          <h1 className="title">Operations Planner</h1>
+          
+          <div className="card" style={{ marginTop: 32 }}>
+            <div style={{ display: "flex", gap: 12, marginBottom: 24 }}>
+              <input className="input-base" placeholder="Define new objective..." value={newTodo} onChange={e=>{setNewTodo(e.target.value); haptic('tick');}} onKeyDown={e=>e.key==='Enter'&&handleAddTodo()} />
+              <button className="btn primary" style={{ width: "auto", padding: "12px 32px" }} onClick={handleAddTodo}>Add Objective</button>
+            </div>
+            
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {(state.todos || []).map((t, i) => (
+                <div key={t.id} className="stagger-item" style={{ animationDelay: `${i * 0.05}s`, display: "flex", alignItems: "center", gap: 16, background: "var(--bg2)", padding: "16px 20px", borderRadius: 8, opacity: t.done ? 0.5 : 1, transition: "all 0.3s ease" }}>
+                  <input type="checkbox" checked={t.done} onChange={() => toggleTodo(t.id)} style={{ width: 20, height: 20, accentColor: "var(--accent)", cursor: "pointer", transform: t.done ? "scale(1.1)" : "scale(1)", transition: "transform 0.2s" }} />
+                  <span style={{ textDecoration: t.done ? "line-through" : "none", flex: 1, fontSize: 15 }}>{t.text}</span>
+                  <button onClick={()=>{ haptic('heavy'); setState(s=>({...s, todos: s.todos.filter(x=>x.id!==t.id)}))}} className="action-btn delete" style={{ background: "none", border: "none", color: "var(--danger)", cursor: "pointer", fontSize: 16 }}>✕</button>
+                </div>
+              ))}
+              {(!state.todos || state.todos.length === 0) && <div style={{ color: "var(--text-dim)", fontSize: 14, textAlign: "center", padding: "40px 0" }}>No active tasks scheduled.</div>}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ─── VIEW 6: REWARDS (STANDALONE) ───
+    function RewardsView({ state, setState }) {
+      const [newReward, setNewReward] = useState("");
+      const [newCost, setNewCost] = useState(50);
+      const [celebratingId, setCelebratingId] = useState(null);
+
+      const handleAddReward = () => {
+        if (!newReward) { haptic('error'); return; }
+        haptic('light');
+        setState(s => ({ ...s, rewards: [...(s.rewards || []), { id: Date.now(), text: newReward, cost: parseInt(newCost), redeemed: false }] }));
+        setNewReward("");
+      };
+
+      const redeemReward = (r) => {
+        if (r.redeemed) return;
+        setState(s => {
+          if ((s.points || 0) >= r.cost) {
+            haptic('success');
+            setCelebratingId(r.id);
+            setTimeout(() => setCelebratingId(null), 1500);
+            
+            const updatedRewards = (s.rewards || []).map(item => item.id === r.id ? { ...item, redeemed: true } : item);
+            return { ...s, points: s.points - r.cost, rewards: updatedRewards };
+          }
+          haptic('error');
+          alert("Not enough resources (points) for redemption!");
+          return s;
+        });
+      };
+
+      return (
+        <div className="animate-in">
+          <span className="subtitle">Incentives & Morale</span>
+          <h1 className="title">Rewards System</h1>
+          
+          <div className="card" style={{ marginTop: 32, textAlign: 'center', padding: '40px' }}>
+            <span className="subtitle" style={{ marginBottom: 12 }}>Available Resources (Points)</span>
+            <div className="font-syne" style={{ fontSize: 72, fontWeight: 800, color: "var(--accent)", lineHeight: 1 }}>{state.points || 0}</div>
+            <div style={{ fontSize: 13, color: "var(--text-dim)", marginTop: 16 }}>Earn points by logging hours (+10/hr) and completing tasks (+5/task).</div>
+          </div>
+
+          <div className="card">
+            <span className="subtitle" style={{ marginBottom: 16 }}>Available Rewards</span>
+            <div style={{ display: "flex", gap: 12, marginBottom: 32 }}>
+              <input className="input-base" placeholder="Define reward..." value={newReward} onChange={e=>{setNewReward(e.target.value); haptic('tick');}} onKeyDown={e=>e.key==='Enter'&&handleAddReward()} />
+              <input className="input-base font-mono" type="number" style={{ width: 120 }} value={newCost} onChange={e=>{setNewCost(e.target.value); haptic('tick');}} />
+              <button className="btn primary" style={{ width: "auto", padding: "12px 32px" }} onClick={handleAddReward}>Add Reward</button>
+            </div>
+            
+            <div className="grid-2">
+              {(state.rewards || []).map((r, i) => (
+                <div key={r.id} className={`stagger-item ${celebratingId === r.id ? "celebrating" : ""}`} style={{ animationDelay: `${i * 0.1}s`, position: "relative", display: "flex", flexDirection: "column", gap: 16, background: "var(--bg2)", padding: "24px", borderRadius: 12, transition: "all 0.3s", opacity: r.redeemed ? 0.4 : 1, border: "1px solid var(--border)" }}>
+                  {celebratingId === r.id && <div className="particle" style={{ left: '50%', top: '20%' }}>🎉</div>}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <div style={{ fontSize: 16, fontWeight: 600, textDecoration: r.redeemed ? "line-through" : "none" }}>{r.text}</div>
+                    <button onClick={()=>{haptic('heavy'); setState(s=>({...s, rewards: s.rewards.filter(x=>x.id!==r.id)}))}} className="action-btn delete" style={{ background: "none", border: "none", color: "var(--danger)", cursor: "pointer", fontSize: 16, marginTop: -4 }}>✕</button>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto" }}>
+                    <span className="font-mono" style={{ color: "var(--accent)", fontWeight: 700, fontSize: 18 }}>{r.cost} pts</span>
+                    {!r.redeemed && (
+                      <button className="btn primary" style={{ padding: "8px 24px", fontSize: 11, width: "auto" }} onClick={() => redeemReward(r)}>REDEEM</button>
+                    )}
+                    {r.redeemed && (
+                       <span style={{ fontSize: 11, color: "var(--success)", fontWeight: 800, padding: "8px 0", letterSpacing: "0.05em" }}>CLAIMED</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {(!state.rewards || state.rewards.length === 0) && <div style={{ color: "var(--text-dim)", fontSize: 14, textAlign: "center", padding: "20px 0" }}>No rewards defined.</div>}
+          </div>
+        </div>
+      );
+    }
+
+    // ─── VIEW 7: ANALYTICS (HEATMAP & CHARTS) ───
+    function AnalyticsView({ sessions }) {
+      const [timeframe, setTimeframe] = useState('weekly'); 
+      const [lineTimeframe, setLineTimeframe] = useState('week');
+
+      const lineDays = lineTimeframe === 'week' ? 7 : 30;
+      const lineData = useMemo(() => {
+        const data = [];
+        for (let i = lineDays - 1; i >= 0; i--) {
+          const dStr = getPastDateStr(i);
+          const hrs = sessions.filter(s => s.date === dStr).reduce((a, b) => a + b.hours, 0);
+          data.push({ date: dStr, value: hrs });
+        }
+        return data;
+      }, [sessions, lineDays]);
+
+      const renderLineChart = () => {
+        const w = 800, h = 180;
+        const maxVal = Math.max(...lineData.map(d => d.value), DAILY_GOAL, 1);
+        const pts = lineData.map((d, i) => {
+          const x = (i / (lineDays - 1)) * w;
+          const y = h - (d.value / maxVal) * h;
+          return {x, y, ...d};
+        });
+        const pointsStr = pts.map(p => `${p.x},${p.y}`).join(' ');
+
+        return (
+          <div style={{ position: 'relative', width: '100%', height: `${h}px`, marginTop: '20px' }}>
+            <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+               <line x1="0" y1={h} x2={w} y2={h} stroke="var(--border)" strokeWidth="1" />
+               <line x1="0" y1={h/2} x2={w} y2={h/2} stroke="var(--border)" strokeWidth="1" strokeDasharray="4 4" />
+               <line x1="0" y1={h - (DAILY_GOAL/maxVal)*h} x2={w} y2={h - (DAILY_GOAL/maxVal)*h} stroke="var(--success)" strokeWidth="1" strokeDasharray="2 2" opacity="0.5" />
+               <polyline points={pointsStr} fill="none" stroke="var(--accent)" strokeWidth="2" style={{ transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }} />
+               {pts.map((p, i) => (
+                  <g key={i} className="chart-pt">
+                    <circle cx={p.x} cy={p.y} r="3" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2" style={{ transition: "all 0.5s ease" }} />
+                    <title>{p.date}: {p.value.toFixed(1)}h</title>
+                  </g>
+               ))}
+            </svg>
+          </div>
+        );
+      }
+
+      const heatmapDays = useMemo(() => {
+        const days = [];
+        for (let i = 83; i >= 0; i--) {
+          const dStr = getPastDateStr(i);
+          const hrs = sessions.filter(s => s.date === dStr).reduce((a, b) => a + b.hours, 0);
+          days.push({ date: dStr, hours: hrs });
+        }
+        return days;
+      }, [sessions]);
+
+      const getColorForHours = (h) => {
+        if (h === 0) return "var(--bg3)";
+        if (h < 3) return "rgba(218,119,86,0.2)";
+        if (h < 6) return "rgba(218,119,86,0.45)";
+        if (h < 9) return "rgba(218,119,86,0.72)";
+        return "var(--accent)";
+      };
+
+      const chartData = useMemo(() => {
+        if (timeframe === 'weekly') {
+          const weeks = [];
+          for(let i=7; i>=0; i--) {
+            const start = new Date(); start.setDate(start.getDate() - (i*7) - start.getDay() + 1);
+            const end = new Date(start); end.setDate(end.getDate() + 6);
+            let hrs = 0;
+            sessions.forEach(s => {
+              const d = new Date(s.date);
+              if(d >= start && d <= end) hrs += s.hours;
+            });
+            weeks.push({ label: `W${8-i}`, value: hrs });
+          }
+          return weeks;
+        } else {
+          const months = [];
+          for(let i=5; i>=0; i--) {
+            const d = new Date(); d.setMonth(d.getMonth() - i);
+            const monthStr = d.toISOString().slice(0, 7);
+            const label = d.toLocaleString('default', { month: 'short' });
+            let hrs = sessions.filter(s => s.date.startsWith(monthStr)).reduce((a,b) => a+b.hours, 0);
+            months.push({ label, value: hrs });
+          }
+          return months;
+        }
+      }, [sessions, timeframe]);
+      
+      const maxChartVal = Math.max(...chartData.map(d => d.value), 1);
+
+      return (
+        <div className="animate-in">
+          <span className="subtitle">Intelligence & Metrics</span>
+          <h1 className="title">Analytics Engine</h1>
+
+          <div className="card stagger-item" style={{ marginTop: 32 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span className="subtitle" style={{ margin: 0 }}>Daily Hours Activity</span>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button onClick={() => { setLineTimeframe('week'); haptic('light'); }} style={{ background: lineTimeframe==='week'?'var(--bg3)':'transparent', border: 'none', color: lineTimeframe==='week'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>WEEK</button>
+                <button onClick={() => { setLineTimeframe('month'); haptic('light'); }} style={{ background: lineTimeframe==='month'?'var(--bg3)':'transparent', border: 'none', color: lineTimeframe==='month'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>MONTH</button>
+              </div>
+            </div>
+            {renderLineChart()}
+          </div>
+
+          <div className="grid-2">
+            <div className="card stagger-item" style={{ animationDelay: '0.1s' }}>
+              <span className="subtitle">12-Week Theater Activity</span>
+              <div className="heatmap-grid" style={{ overflowX: "auto", paddingBottom: 8 }}>
+                {heatmapDays.map((d, i) => (
+                  <div key={i} className="heat-cell" style={{ background: getColorForHours(d.hours) }} title={`${d.date}: ${d.hours}h`} />
+                ))}
+              </div>
+              <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 4, marginTop: 12, fontSize: 10, color: "var(--text-dim)" }}>
+                Less <div style={{width: 10, height: 10, background: getColorForHours(0), borderRadius: 2}}></div>
+                <div style={{width: 10, height: 10, background: getColorForHours(3), borderRadius: 2}}></div>
+                <div style={{width: 10, height: 10, background: getColorForHours(7), borderRadius: 2}}></div>
+                <div style={{width: 10, height: 10, background: getColorForHours(10), borderRadius: 2}}></div> More
+              </div>
+            </div>
+
+            <div className="card stagger-item" style={{ animationDelay: '0.2s' }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span className="subtitle" style={{ margin: 0 }}>Deployment Trends</span>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <button onClick={() => { setTimeframe('weekly'); haptic('light'); }} style={{ background: timeframe==='weekly'?'var(--bg3)':'transparent', border: 'none', color: timeframe==='weekly'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>WEEKLY</button>
+                  <button onClick={() => { setTimeframe('monthly'); haptic('light'); }} style={{ background: timeframe==='monthly'?'var(--bg3)':'transparent', border: 'none', color: timeframe==='monthly'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>MONTHLY</button>
+                </div>
+              </div>
+              
+              <div className="bar-chart-container">
+                {chartData.map((d, i) => (
+                  <div key={i} className="bar-wrapper" style={{ transitionDelay: `${i * 0.05}s` }}>
+                    <div className="bar" style={{ height: `${(d.value / maxChartVal) * 100}%` }}>
+                      <div className="bar-value font-mono">{d.value.toFixed(0)}</div>
+                    </div>
+                    <div className="bar-label">{d.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ─── VIEW 8: TESTS ───
+    function TestsView({ tests, logTest, deleteTest }) {
+      const [name, setName] = useState("");
+      const [type, setType] = useState(EXAM_TYPES[0]);
+      const [score, setScore] = useState("");
+      const [total, setTotal] = useState("200");
+
+      const handleLog = () => {
+        if (name && score && total) {
+          logTest(name, type, score, total);
+          setName(""); setScore("");
+        } else {
+          haptic('error');
+        }
+      };
+
+      const sortedTests = [...tests].sort((a, b) => new Date(a.date) - new Date(b.date));
+      const chartMax = 100;
+
+      const avgScore = tests.length ? (tests.reduce((a,b)=>a+b.percentage,0)/tests.length).toFixed(1) : 0;
+      const peakScore = tests.length ? Math.max(...tests.map(t=>t.percentage)).toFixed(1) : 0;
+
+      return (
+        <div className="animate-in">
+          <span className="subtitle">Evaluation & Metrics</span>
+          <h1 className="title">Testing Sector</h1>
+
+          <div className="grid-3" style={{ marginTop: 32, marginBottom: 24 }}>
+            <div className="card stagger-item" style={{ padding: "16px 24px", marginBottom: 0 }}>
+              <span className="subtitle" style={{ marginBottom: 8 }}>Operations Conducted</span>
+              <div className="font-syne" style={{ fontSize: 28, fontWeight: 800 }}>{tests.length}</div>
+            </div>
+            <div className="card stagger-item" style={{ animationDelay: '0.1s', padding: "16px 24px", marginBottom: 0 }}>
+              <span className="subtitle" style={{ marginBottom: 8 }}>Average Accuracy</span>
+              <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, color: "var(--accent)" }}>{avgScore}%</div>
+            </div>
+            <div className="card stagger-item" style={{ animationDelay: '0.2s', padding: "16px 24px", marginBottom: 0 }}>
+              <span className="subtitle" style={{ marginBottom: 8 }}>Peak Performance</span>
+              <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, color: "var(--success)" }}>{peakScore}%</div>
+            </div>
+          </div>
+
+          <div className="grid-2">
+            <div className="card stagger-item" style={{ animationDelay: '0.3s' }}>
+              <span className="subtitle">Log New Evaluation</span>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ fontSize: 12, color: "var(--text-dim)", display: "block", marginBottom: 6 }}>Test Name / Source</label>
+                <input className="input-base" placeholder="e.g. Vision IAS Mock 1" value={name} onChange={e=>{setName(e.target.value); haptic('tick');}} />
+              </div>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ fontSize: 12, color: "var(--text-dim)", display: "block", marginBottom: 6 }}>Test Type</label>
+                <select className="input-base" value={type} onChange={e=>{setType(e.target.value); haptic('tick');}}>
+                  {EXAM_TYPES.map(t => <option key={t}>{t}</option>)}
+                </select>
+              </div>
+              <div className="grid-2" style={{ gap: 16, marginBottom: 24 }}>
+                <div>
+                  <label style={{ fontSize: 12, color: "var(--text-dim)", display: "block", marginBottom: 6 }}>Score Obtained</label>
+                  <input className="input-base font-mono" type="number" value={score} onChange={e=>{setScore(e.target.value); haptic('tick');}} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 12, color: "var(--text-dim)", display: "block", marginBottom: 6 }}>Total Marks</label>
+                  <input className="input-base font-mono" type="number" value={total} onChange={e=>{setTotal(e.target.value); haptic('tick');}} />
+                </div>
+              </div>
+              <button className="btn primary" onClick={handleLog}>Log Result</button>
+            </div>
+
+            <div className="card stagger-item" style={{ animationDelay: '0.4s' }}>
+              <span className="subtitle">Performance Trend (Accuracy %)</span>
+              {tests.length === 0 ? (
+                <div style={{ height: 180, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-dim)", fontSize: 13 }}>No test data available.</div>
+              ) : (
+                <div className="bar-chart-container" style={{ paddingTop: 30 }}>
+                  {sortedTests.slice(-10).map((t, i) => {
+                    const h = (t.percentage / chartMax) * 100;
+                    const color = t.percentage >= 70 ? "var(--success)" : t.percentage >= 50 ? "var(--accent)" : "var(--danger)";
+                    return (
+                      <div key={i} className="bar-wrapper" title={`${t.name}: ${t.percentage.toFixed(1)}%`} style={{ transitionDelay: `${i * 0.05}s` }}>
+                        <div className="bar-value font-mono" style={{ color }}>{t.percentage.toFixed(0)}%</div>
+                        <div className="bar" style={{ height: `${h}%`, background: color }}></div>
+                        <div className="bar-label">{t.date.slice(5)}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="card stagger-item" style={{ animationDelay: '0.5s' }}>
+            <span className="subtitle">Intelligence Archive</span>
+            {tests.length === 0 && <div style={{ color: "var(--text-dim)", fontSize: 13 }}>No tests recorded.</div>}
+            {tests.slice().reverse().map((t, i) => (
+              <div key={t.id} className="stagger-item" style={{ animationDelay: `${i * 0.05}s`, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px", background: "var(--bg2)", borderRadius: 8, marginBottom: 8 }}>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 15, color: "var(--text)" }}>{t.name}</div>
+                  <div style={{ fontSize: 12, color: "var(--text-dim)", marginTop: 4 }}>{t.type} · {t.date}</div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+                  <div style={{ textAlign: "right" }}>
+                    <div className="font-mono" style={{ fontSize: 18, fontWeight: 700, color: t.percentage >= 70 ? "var(--success)" : t.percentage >= 50 ? "var(--accent)" : "var(--danger)" }}>{t.percentage.toFixed(1)}%</div>
+                    <div className="font-mono" style={{ fontSize: 11, color: "var(--text-muted)" }}>{t.score} / {t.total}</div>
+                  </div>
+                  <button onClick={() => deleteTest(t.id)} className="action-btn delete" style={{ background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", fontSize: 16 }}>✕</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('[PWA] SW registered:', reg.scope))
+          .catch(err => console.warn('[PWA] SW failed:', err));
+      });
+    }
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault(); deferredPrompt = e;
+      const b = document.getElementById('install-banner');
+      if (b) b.style.display = 'flex';
+    });
+    window.addEventListener('appinstalled', () => {
+      const b = document.getElementById('install-banner');
+      if (b) b.style.display = 'none';
+      deferredPrompt = null;
+    });
+    function installPWA() {
+      if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.then(() => { deferredPrompt = null; }); }
+    }
+    function dismissBanner() {
+      const b = document.getElementById('install-banner');
+      if (b) b.style.display = 'none';
+    }
+  </script>
+
+  <div id="install-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#fff;border-top:1px solid #e5e4e2;padding:14px 20px;align-items:center;justify-content:space-between;gap:12px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;background:#1a1a18;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;">G</div>
+      <div>
+        <div style="font-size:14px;font-weight:500;color:#1a1a18;font-family:'DM Sans',sans-serif;">Install Grand Strategy</div>
+        <div style="font-size:12px;color:#a3a39f;font-family:'DM Sans',sans-serif;">Add to home screen for offline access</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <button onclick="dismissBanner()" style="padding:8px 14px;border:1px solid #e5e4e2;background:#f9f9f8;border-radius:7px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;color:#6b6b68;">Not now</button>
+      <button onclick="installPWA()" style="padding:8px 14px;border:none;background:#1a1a18;color:#fff;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;">Install</button>
+    </div>
+  </div>
+</body>
+</html>
