@@ -70,9 +70,16 @@
       --danger: #c0392b;
       --danger-soft: rgba(192, 57, 43, 0.1);
 
-      --sidebar-w: 240px;
-      --radius: 10px;
-      --radius-sm: 7px;
+      --sidebar-w: 252px;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 20px;
+      --space-5: 28px;
+      --surface-raised: var(--bg);
     }
 
     [data-theme="dark"] {
@@ -122,14 +129,17 @@
     html[data-theme="dark"] { color-scheme: dark; }
 
     body {
-      font-family: 'DM Sans', -apple-system, sans-serif;
-      background: var(--bg);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(ellipse 120% 80% at 100% -20%, var(--accent-soft), transparent 50%),
+        radial-gradient(ellipse 80% 50% at -10% 100%, rgba(96, 165, 250, 0.06), transparent 45%),
+        var(--bg);
       color: var(--text);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.55;
       transition: background-color 0.25s ease, color 0.2s ease;
     }
 
@@ -300,12 +310,48 @@
                   box-shadow 0.25s ease, transform 0.2s ease;
       box-shadow: var(--shadow-sm);
     }
-    .card:hover {
-      border-color: var(--border-strong);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-1px);
+    @media (hover: hover) {
+      .card:hover {
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-1px);
+      }
     }
     .card.flush:hover { transform: none; box-shadow: var(--shadow-sm); }
+    .card.static { pointer-events: auto; }
+    @media (hover: hover) {
+      .card.static:hover { transform: none; box-shadow: var(--shadow-sm); border-color: var(--border); }
+    }
+
+    .stat-card {
+      margin-bottom: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0.85;
+    }
+    .stat-card .stat-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .stat-card .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+    .stat-card .stat-sub { font-size: 11px; color: var(--text-muted); }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -545,6 +591,287 @@
     .install-banner-title { font-size: 14px; font-weight: 500; color: var(--text); font-family: 'DM Sans', sans-serif; }
     .install-banner-sub { font-size: 12px; color: var(--text-dim); font-family: 'DM Sans', sans-serif; }
     .install-banner-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+      flex-wrap: wrap;
+    }
+    .page-eyebrow {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .page-title {
+      font-size: clamp(1.5rem, 4vw, 1.85rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text);
+    }
+    .page-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      max-width: 42ch;
+      line-height: 1.5;
+    }
+
+    /* ─── SIDEBAR BRAND & NAV GROUPS ─── */
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 4px 20px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-brand-title { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
+    .sidebar-brand-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .nav-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 14px 12px 6px;
+      margin-top: 4px;
+    }
+    .nav-item .nav-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      background: var(--bg3);
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .nav-item.active .nav-icon { background: var(--accent-mid); }
+
+    /* ─── PAGE TRANSITIONS ─── */
+    .page-enter {
+      animation: pageIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── CHIPS & SEGMENTED ─── */
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .chip:hover { border-color: var(--border-strong); color: var(--text); background: var(--bg3); }
+    .chip.active {
+      background: var(--accent-soft);
+      border-color: var(--accent-mid);
+      color: var(--text);
+    }
+    .seg-control {
+      display: inline-flex;
+      padding: 3px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      gap: 2px;
+    }
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .seg-btn.active { background: var(--bg); color: var(--text); box-shadow: var(--shadow-sm); }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--text-dim);
+    }
+    .empty-state-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.6; }
+    .empty-state-title { font-size: 15px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+    .empty-state-desc { font-size: 13px; line-height: 1.5; max-width: 28ch; margin: 0 auto; }
+
+    /* ─── TOASTS ─── */
+    .toast-host {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+      max-width: min(360px, calc(100vw - 32px));
+    }
+    .toast {
+      pointer-events: auto;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface-overlay);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-lg);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .toast.success { border-color: rgba(45, 134, 83, 0.35); background: var(--success-soft); }
+    .toast.error { border-color: rgba(192, 57, 43, 0.35); background: var(--danger-soft); }
+    .toast.info { border-color: var(--accent-mid); }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ─── MOBILE MORE SHEET ─── */
+    .sheet-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 200;
+      animation: fadeIn 0.2s ease forwards;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .more-sheet {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 201;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 12px 16px calc(22px + env(safe-area-inset-bottom, 0px));
+      box-shadow: var(--shadow-lg);
+      animation: sheetUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes sheetUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .more-sheet-handle {
+      width: 36px; height: 4px;
+      background: var(--border-strong);
+      border-radius: 99px;
+      margin: 0 auto 16px;
+    }
+    .more-sheet-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+    .more-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .more-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .more-item:hover, .more-item.active {
+      background: var(--accent-soft);
+      border-color: var(--accent-mid);
+      color: var(--text);
+    }
+    .more-item span.icon { font-size: 22px; }
+
+    .dashboard-hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
+      flex-wrap: wrap;
+    }
+    .countdown-card {
+      display: flex;
+      gap: 14px;
+      background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .countdown-unit { text-align: center; min-width: 40px; }
+    .countdown-value {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+    .countdown-label {
+      font-size: 8px;
+      color: var(--text-dim);
+      font-weight: 700;
+      margin-top: 4px;
+      letter-spacing: 0.06em;
+    }
+    @media (max-width: 768px) {
+      .dashboard-hero { flex-direction: column; align-items: stretch; }
+      .countdown-card { justify-content: space-between; width: 100%; }
+      .bottom-nav {
+        justify-content: space-around;
+        padding: 8px 8px calc(14px + env(safe-area-inset-bottom, 0px));
+      }
+      .tab-btn { min-width: 0; flex: 1; max-width: 72px; font-size: 9px; }
+      .tab-btn .tab-label { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .toast-host { left: 16px; right: 16px; top: 12px; max-width: none; }
+    }
   </style>
 </head>
 <body>
@@ -569,6 +896,70 @@
         } catch(e) { /* Device doesn't support vibration */ }
       }
     };
+
+    let toastPush = null;
+    const showToast = (message, type = 'info') => {
+      if (!toastPush) return;
+      const id = Date.now() + Math.random();
+      toastPush(prev => [...prev, { id, message, type }]);
+      setTimeout(() => toastPush(prev => prev.filter(t => t.id !== id)), 3200);
+    };
+
+    function ToastHost() {
+      const [toasts, setToasts] = useState([]);
+      useEffect(() => { toastPush = setToasts; return () => { toastPush = null; }; }, []);
+      const icons = { success: '✓', error: '✕', info: '◆' };
+      return (
+        <div className="toast-host" aria-live="polite">
+          {toasts.map(t => (
+            <div key={t.id} className={`toast ${t.type}`}>
+              <span aria-hidden="true">{icons[t.type] || '◆'}</span>
+              <span>{t.message}</span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    function PageHeader({ eyebrow, title, description, action }) {
+      return (
+        <header className="page-header">
+          <div>
+            {eyebrow && <span className="page-eyebrow">{eyebrow}</span>}
+            <h1 className="page-title">{title}</h1>
+            {description && <p className="page-desc">{description}</p>}
+          </div>
+          {action && <div className="page-header-action">{action}</div>}
+        </header>
+      );
+    }
+
+    function SegControl({ value, onChange, options }) {
+      return (
+        <div className="seg-control" role="tablist">
+          {options.map(opt => (
+            <button
+              key={opt.id}
+              type="button"
+              role="tab"
+              aria-selected={value === opt.id}
+              className={`seg-btn${value === opt.id ? " active" : ""}`}
+              onClick={() => onChange(opt.id)}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    const NAV_GROUPS = [
+      { label: 'Command', ids: ['dashboard', 'deploy'] },
+      { label: 'Study', ids: ['syllabus', 'focus', 'planner'] },
+      { label: 'Insights', ids: ['analytics', 'tests', 'rewards'] },
+      { label: 'System', ids: ['settings'] },
+    ];
+    const MOBILE_PRIMARY_TAB_IDS = ['dashboard', 'deploy', 'syllabus', 'focus'];
 
     // ─── DATA & CONSTANTS ───
     const SUBJECTS = ["History", "Geography", "Polity", "Economy", "Science & Tech", "Environment", "CSAT", "Current Affairs", "Optional Subject"];
@@ -840,27 +1231,49 @@
         { id: "dashboard", icon: "⌘", label: "Overview" },
         { id: "deploy", icon: "⚡", label: "Deploy" },
         { id: "syllabus", icon: "📚", label: "Syllabus" },
-        { id: "focus", icon: "⏱️", label: "Deep Work" },
+        { id: "focus", icon: "⏱️", label: "Focus" },
         { id: "planner", icon: "📋", label: "Planner" },
         { id: "rewards", icon: "🏆", label: "Rewards" },
         { id: "analytics", icon: "📊", label: "Analytics" },
-        { id: "tests", icon: "🎯", label: "Testing" },
+        { id: "tests", icon: "🎯", label: "Tests" },
         { id: "settings", icon: "⚙️", label: "Settings" },
       ];
+      const tabById = Object.fromEntries(TABS.map(t => [t.id, t]));
+      const [moreOpen, setMoreOpen] = useState(false);
+      const isMoreTab = !MOBILE_PRIMARY_TAB_IDS.includes(tab);
+
+      const switchTab = (tId) => {
+        handleTabSwitch(tId);
+        setMoreOpen(false);
+      };
 
       return (
         <div className="app-layout">
+          <ToastHost />
           {/* Desktop Sidebar */}
           <aside className="sidebar">
-            <div style={{ marginBottom: 32, display: "flex", alignItems: "center", gap: 10, padding: "0 4px" }}>
+            <div className="sidebar-brand">
               <div className="app-logo">G</div>
-              <div className="font-syne" style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.01em", color: "var(--text)" }}>Grand Strategy</div>
+              <div>
+                <div className="sidebar-brand-title">Grand Strategy</div>
+                <div className="sidebar-brand-sub">UPSC Command Center</div>
+              </div>
             </div>
             
             <div className="sidebar-nav">
-              {TABS.map(t => (
-                <div key={t.id} className={`nav-item ${tab === t.id ? "active" : ""}`} onClick={() => handleTabSwitch(t.id)}>
-                  <span style={{ fontSize: 18 }}>{t.icon}</span> {t.label}
+              {NAV_GROUPS.map(group => (
+                <div key={group.label}>
+                  <div className="nav-section-label">{group.label}</div>
+                  {group.ids.map(id => {
+                    const t = tabById[id];
+                    if (!t) return null;
+                    return (
+                      <div key={t.id} className={`nav-item ${tab === t.id ? "active" : ""}`} onClick={() => switchTab(t.id)} role="button" tabIndex={0} onKeyDown={e => e.key === 'Enter' && switchTab(t.id)}>
+                        <span className="nav-icon">{t.icon}</span>
+                        <span>{t.label}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>
@@ -875,30 +1288,60 @@
             <header className="mobile-header">
               <div className="mobile-header-brand">
                 <div className="app-logo">G</div>
-                <div className="font-syne" style={{ fontSize: 15, fontWeight: 600, color: "var(--text)" }}>Grand Strategy</div>
+                <div>
+                  <div className="font-syne" style={{ fontSize: 15, fontWeight: 600, color: "var(--text)" }}>Grand Strategy</div>
+                  <div style={{ fontSize: 11, color: "var(--text-dim)" }}>{tabById[tab]?.label || 'Overview'}</div>
+                </div>
               </div>
               <ThemeToggle compact />
             </header>
-            {tab === "dashboard" && <DashboardView state={state} now={now} updateTimeline={updateTimeline} setState={setState} />}
-            {tab === "deploy" && <DeployView sessions={state.sessions} logSession={logSession} deleteSession={deleteSession} dailyGoal={getDailyGoal(state)} />}
-            {tab === "syllabus" && <SyllabusView state={state} setState={setState} />}
-            {tab === "focus" && <FocusView state={state} setState={setState} />}
-            {tab === "planner" && <PlannerView state={state} setState={setState} />}
-            {tab === "rewards" && <RewardsView state={state} setState={setState} />}
-            {tab === "analytics" && <AnalyticsView sessions={state.sessions} dailyGoal={getDailyGoal(state)} />}
-            {tab === "tests" && <TestsView tests={state.tests} logTest={logTest} deleteTest={deleteTest} />}
-            {tab === "settings" && <SettingsView state={state} setState={setState} importData={importData} resetAllData={resetAllData} />}
+            <div key={tab} className="page-enter">
+              {tab === "dashboard" && <DashboardView state={state} now={now} updateTimeline={updateTimeline} setState={setState} />}
+              {tab === "deploy" && <DeployView sessions={state.sessions} logSession={logSession} deleteSession={deleteSession} dailyGoal={getDailyGoal(state)} />}
+              {tab === "syllabus" && <SyllabusView state={state} setState={setState} />}
+              {tab === "focus" && <FocusView state={state} setState={setState} />}
+              {tab === "planner" && <PlannerView state={state} setState={setState} />}
+              {tab === "rewards" && <RewardsView state={state} setState={setState} />}
+              {tab === "analytics" && <AnalyticsView sessions={state.sessions} dailyGoal={getDailyGoal(state)} />}
+              {tab === "tests" && <TestsView tests={state.tests} logTest={logTest} deleteTest={deleteTest} />}
+              {tab === "settings" && <SettingsView state={state} setState={setState} importData={importData} resetAllData={resetAllData} />}
+            </div>
           </main>
 
           {/* Mobile Bottom Nav */}
-          <nav className="bottom-nav">
-            {TABS.map(t => (
-              <button key={`mob-${t.id}`} className={`tab-btn ${tab === t.id ? "active" : ""}`} onClick={() => handleTabSwitch(t.id)}>
-                <span className="icon">{t.icon}</span>
-                {t.label}
-              </button>
-            ))}
+          <nav className="bottom-nav" aria-label="Main navigation">
+            {MOBILE_PRIMARY_TAB_IDS.map(id => {
+              const t = tabById[id];
+              return (
+                <button key={`mob-${t.id}`} type="button" className={`tab-btn ${tab === t.id ? "active" : ""}`} onClick={() => switchTab(t.id)}>
+                  <span className="icon">{t.icon}</span>
+                  <span className="tab-label">{t.label}</span>
+                </button>
+              );
+            })}
+            <button type="button" className={`tab-btn ${isMoreTab ? "active" : ""}`} onClick={() => { haptic('light'); setMoreOpen(true); }}>
+              <span className="icon">⋯</span>
+              <span className="tab-label">More</span>
+            </button>
           </nav>
+
+          {moreOpen && (
+            <>
+              <div className="sheet-backdrop" onClick={() => setMoreOpen(false)} aria-hidden="true" />
+              <div className="more-sheet" role="dialog" aria-label="More sections">
+                <div className="more-sheet-handle" />
+                <div className="more-sheet-title">More sections</div>
+                <div className="more-grid">
+                  {TABS.filter(t => !MOBILE_PRIMARY_TAB_IDS.includes(t.id)).map(t => (
+                    <button key={t.id} type="button" className={`more-item ${tab === t.id ? "active" : ""}`} onClick={() => switchTab(t.id)}>
+                      <span className="icon">{t.icon}</span>
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       );
     }
@@ -1078,21 +1521,24 @@
 
       return (
         <div className="animate-in">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 28 }}>
+          <div className="dashboard-hero">
             <div>
-              <span className="subtitle">{greetIcon} {greeting}, Commander</span>
-              <h1 className="title" style={{ fontSize: 32 }}>Theater Overview</h1>
+              <PageHeader
+                eyebrow={`${greetIcon} ${greeting}, Commander`}
+                title="Theater Overview"
+                description="Your daily command snapshot — streak, goals, and campaign progress."
+              />
             </div>
-            <div style={{ textAlign: "right" }}>
-              <div className="subtitle" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 8, marginBottom: 8 }}>
-                {msLeft > 0 ? "EXAM COUNTDOWN" : "CAMPAIGN COMPLETE"}
-                <button onClick={() => { setIsEditingDate(!isEditingDate); haptic('light'); }} style={{ background: 'var(--bg2)', border: '1px solid var(--border)', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 9, padding: "2px 6px", borderRadius: "4px", transition: "transform 0.2s" }}>EDIT</button>
+            <div style={{ flexShrink: 0 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 8, marginBottom: 8 }}>
+                <span className="page-eyebrow" style={{ margin: 0 }}>{msLeft > 0 ? "Exam countdown" : "Campaign complete"}</span>
+                <button type="button" className="chip" style={{ padding: "4px 10px", fontSize: 10 }} onClick={() => { setIsEditingDate(!isEditingDate); haptic('light'); }}>Edit date</button>
               </div>
-              <div style={{ display: "flex", gap: 16, background: "linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 16px", boxShadow: "var(--shadow-sm)" }}>
-                {[["d", "DAYS"], ["h", "HRS"], ["m", "MIN"], ["s", "SEC"]].map(([k, label]) => (
-                  <div key={k} style={{ textAlign: "center", minWidth: 36 }}>
-                    <div className="font-syne" style={{ fontSize: 26, fontWeight: 800, color: msLeft < 86400000 * 7 ? "var(--danger)" : "var(--text)", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>{countdown[k]}</div>
-                    <div style={{ fontSize: 8, color: "var(--text-dim)", fontWeight: 700, marginTop: 4 }}>{label}</div>
+              <div className="countdown-card">
+                {[["d", "Days"], ["h", "Hrs"], ["m", "Min"], ["s", "Sec"]].map(([k, label]) => (
+                  <div key={k} className="countdown-unit">
+                    <div className="countdown-value" style={{ color: msLeft < 86400000 * 7 ? "var(--danger)" : "var(--text)" }}>{countdown[k]}</div>
+                    <div className="countdown-label">{label}</div>
                   </div>
                 ))}
               </div>
@@ -1109,18 +1555,18 @@
             </div>
           )}
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 20 }}>
+          <div className="grid-4" style={{ marginBottom: 20 }}>
             {[
               { icon: "🔥", label: "Active Streak", value: `${state.streak}d`, sub: "consecutive days", color: "var(--accent)" },
               { icon: "🏆", label: "Best Streak", value: `${state.longestStreak}d`, sub: "all-time record", color: "var(--success)" },
               { icon: "⚡", label: "Today's Hours", value: `${todayHours.toFixed(1)}h`, sub: `Goal: ${dailyGoal}h`, color: todayHours >= dailyGoal ? "var(--success)" : "var(--accent)" },
               { icon: "📈", label: "Total Hours", value: `${totalHours.toFixed(0)}h`, sub: `${state.sessions.length} sessions`, color: "var(--chart-blue)" },
             ].map((s, i) => (
-              <div key={i} className="card stagger-item" style={{ animationDelay: `${i * 0.1}s`, padding: "18px 20px", marginBottom: 0, position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 12, right: 14, fontSize: 22, opacity: 0.15 }}>{s.icon}</div>
-                <div style={{ fontSize: 10, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 700, marginBottom: 8 }}>{s.label}</div>
-                <div className="font-syne" style={{ fontSize: 28, fontWeight: 800, color: s.color, lineHeight: 1, marginBottom: 4 }}>{s.value}</div>
-                <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{s.sub}</div>
+              <div key={i} className="card stat-card stagger-item static" style={{ animationDelay: `${i * 0.1}s`, padding: "18px 20px" }}>
+                <div style={{ position: "absolute", top: 12, right: 14, fontSize: 22, opacity: 0.12 }} aria-hidden="true">{s.icon}</div>
+                <div className="stat-label">{s.label}</div>
+                <div className="stat-value" style={{ color: s.color }}>{s.value}</div>
+                <div className="stat-sub">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -1303,8 +1749,14 @@
             <h2 className="font-syne" style={{ fontSize: 16, fontWeight: 700 }}>Recent Operations</h2>
             <span style={{ fontSize: 10, color: "var(--text-dim)" }}>LAST {Math.min(5, state.sessions.length)} ENTRIES</span>
           </div>
-          <div className="card stagger-item" style={{ animationDelay: "0.7s", padding: "8px 20px" }}>
-            {state.sessions.length === 0 && <div style={{ color: "var(--text-dim)", fontSize: 13, padding: "12px 0" }}>No deployments yet. Head to Deploy to log your first session.</div>}
+          <div className="card static stagger-item" style={{ animationDelay: "0.7s", padding: "8px 20px" }}>
+            {state.sessions.length === 0 && (
+              <div className="empty-state" style={{ padding: "24px 12px" }}>
+                <div className="empty-state-icon">⚡</div>
+                <div className="empty-state-title">No sessions yet</div>
+                <p className="empty-state-desc">Log your first study block in Deploy to see activity here.</p>
+              </div>
+            )}
             {state.sessions.slice(-5).reverse().map((s, i) => {
               const subjIdx = SUBJECTS.indexOf(s.subject) % subjectColors.length;
               return (
@@ -1337,8 +1789,10 @@
       const handleLog = () => {
         if (hours > 0) {
           logSession(subject, deployType, hours);
+          showToast(`Logged ${hours}h — ${subject}`, "success");
         } else {
           haptic('error');
+          showToast("Enter a duration greater than zero.", "error");
         }
       };
 
@@ -1361,10 +1815,13 @@
 
       return (
         <div className="animate-in">
-          <span className="subtitle">Resource Allocation</span>
-          <h1 className="title">Deploy Hours</h1>
+          <PageHeader
+            eyebrow="Resource allocation"
+            title="Deploy Hours"
+            description="Log study time by subject and operation type."
+          />
 
-          <div className="grid-2" style={{ marginTop: 32 }}>
+          <div className="grid-2">
             <div className="card">
               <div style={{ marginBottom: 20 }}>
                 <label className="subtitle" style={{ display: "block", marginBottom: 8 }}>Target Sector (Subject)</label>
@@ -1419,7 +1876,13 @@
                     </div>
                   </div>
                 ))}
-                {sessions.length === 0 && <div style={{ color: "var(--text-dim)", fontSize: 13 }}>No deployments yet.</div>}
+                {sessions.length === 0 && (
+                  <div className="empty-state" style={{ padding: "28px 12px" }}>
+                    <div className="empty-state-icon">📋</div>
+                    <div className="empty-state-title">Ledger empty</div>
+                    <p className="empty-state-desc">Your logged sessions will appear here.</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -1517,10 +1980,13 @@
 
       return (
         <div className="animate-in">
-          <span className="subtitle">Intelligence Map</span>
-          <h1 className="title">Syllabus Matrix</h1>
-          
-          <div className="paper-tabs" style={{ marginTop: 24 }}>
+          <PageHeader
+            eyebrow="Intelligence map"
+            title="Syllabus Matrix"
+            description="Track readiness by paper and topic — edit scores as you revise."
+          />
+
+          <div className="paper-tabs">
             {safeSyllabus.map(p => (
               <button key={p.id} className={`paper-tab ${activePaper === p.id ? 'active' : ''}`} onClick={() => { setActivePaper(p.id); setEditingTopic(null); haptic('light'); }}>
                 {p.name}
@@ -1623,10 +2089,10 @@
               ...s,
               pomodoros: [...(s.pomodoros || []), { id: Date.now(), date: todayStr() }]
             }));
-            alert("Deep work session complete! Take a breather, Commander.");
+            showToast("Deep work session complete. Take a breather, Commander.", "success");
             setMode(false);
           } else {
-             alert("Break over. Back to the frontlines!");
+             showToast("Break over. Back to the frontlines!", "info");
              setMode(true);
           }
         }
@@ -1707,10 +2173,11 @@
           transition: 'all 0.5s ease'
         }}>
           {!isFullscreen && (
-            <div style={{ marginBottom: 32 }}>
-              <span className="subtitle">Hyperfocus Protocol</span>
-              <h1 className="title">Deep Work Center</h1>
-            </div>
+            <PageHeader
+              eyebrow="Hyperfocus protocol"
+              title="Deep Work Center"
+              description="25-minute focus blocks with optional ambient sound."
+            />
           )}
 
           <div className="card" style={{ 
@@ -1722,9 +2189,12 @@
             border: isFullscreen ? 'none' : '1px solid var(--border)',
             background: isFullscreen ? 'transparent' : 'var(--bg2)',
           }}>
-            <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 32 }}>
-              <button className="btn" style={{ width: "auto", background: isWork ? "var(--hover)" : "transparent", color: isWork ? "var(--accent)" : "var(--text-dim)" }} onClick={() => setMode(true)}>Focus (25m)</button>
-              <button className="btn" style={{ width: "auto", background: !isWork ? "var(--hover)" : "transparent", color: !isWork ? "var(--success)" : "var(--text-dim)" }} onClick={() => setMode(false)}>Break (5m)</button>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
+              <SegControl
+                value={isWork ? "focus" : "break"}
+                onChange={(id) => setMode(id === "focus")}
+                options={[{ id: "focus", label: "Focus 25m" }, { id: "break", label: "Break 5m" }]}
+              />
             </div>
 
             <div className="font-mono" style={{ fontSize: isFullscreen ? 140 : 80, fontWeight: 700, color: isWork ? "var(--accent)" : "var(--success)", lineHeight: 1, marginBottom: 32, transition: 'all 0.5s ease', textShadow: isActive ? `0 0 24px ${isWork ? 'var(--accent-mid)' : 'var(--success-soft)'}` : 'none' }}>
@@ -1806,10 +2276,13 @@
 
       return (
         <div className="animate-in">
-          <span className="subtitle">Task Management</span>
-          <h1 className="title">Operations Planner</h1>
-          
-          <div className="card" style={{ marginTop: 32 }}>
+          <PageHeader
+            eyebrow="Task management"
+            title="Operations Planner"
+            description="Break the syllabus into daily objectives and earn points when you complete them."
+          />
+
+          <div className="card">
             <div style={{ display: "flex", gap: 12, marginBottom: 24 }}>
               <input className="input-base" placeholder="Define new objective..." value={newTodo} onChange={e=>{setNewTodo(e.target.value); haptic('tick');}} onKeyDown={e=>e.key==='Enter'&&handleAddTodo()} />
               <button className="btn primary" style={{ width: "auto", padding: "12px 32px" }} onClick={handleAddTodo}>Add Objective</button>
@@ -1823,7 +2296,13 @@
                   <button onClick={()=>{ haptic('heavy'); setState(s=>({...s, todos: s.todos.filter(x=>x.id!==t.id)}))}} className="action-btn delete" style={{ background: "none", border: "none", color: "var(--danger)", cursor: "pointer", fontSize: 16 }}>✕</button>
                 </div>
               ))}
-              {(!state.todos || state.todos.length === 0) && <div style={{ color: "var(--text-dim)", fontSize: 14, textAlign: "center", padding: "40px 0" }}>No active tasks scheduled.</div>}
+              {(!state.todos || state.todos.length === 0) && (
+                <div className="empty-state">
+                  <div className="empty-state-icon">📝</div>
+                  <div className="empty-state-title">No objectives yet</div>
+                  <p className="empty-state-desc">Add a task above to plan your next study moves.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -1855,17 +2334,20 @@
             return { ...s, points: s.points - r.cost, rewards: updatedRewards };
           }
           haptic('error');
-          alert("Not enough resources (points) for redemption!");
+          showToast("Not enough points for this reward.", "error");
           return s;
         });
       };
 
       return (
         <div className="animate-in">
-          <span className="subtitle">Incentives & Morale</span>
-          <h1 className="title">Rewards System</h1>
-          
-          <div className="card" style={{ marginTop: 32, textAlign: 'center', padding: '40px' }}>
+          <PageHeader
+            eyebrow="Incentives & morale"
+            title="Rewards System"
+            description="Redeem points for treats you define — earned from study hours and completed tasks."
+          />
+
+          <div className="card" style={{ textAlign: 'center', padding: '40px' }}>
             <span className="subtitle" style={{ marginBottom: 12 }}>Available Resources (Points)</span>
             <div className="font-syne" style={{ fontSize: 72, fontWeight: 800, color: "var(--accent)", lineHeight: 1 }}>{state.points || 0}</div>
             <div style={{ fontSize: 13, color: "var(--text-dim)", marginTop: 16 }}>Earn points by logging hours (+10/hr) and completing tasks (+5/task).</div>
@@ -1899,7 +2381,13 @@
                 </div>
               ))}
             </div>
-            {(!state.rewards || state.rewards.length === 0) && <div style={{ color: "var(--text-dim)", fontSize: 14, textAlign: "center", padding: "20px 0" }}>No rewards defined.</div>}
+            {(!state.rewards || state.rewards.length === 0) && (
+              <div className="empty-state">
+                <div className="empty-state-icon">🎁</div>
+                <div className="empty-state-title">No rewards yet</div>
+                <p className="empty-state-desc">Create a reward and set how many points it costs.</p>
+              </div>
+            )}
           </div>
         </div>
       );
@@ -2047,10 +2535,13 @@
 
       return (
         <div className="animate-in">
-          <span className="subtitle">Intelligence & Metrics</span>
-          <h1 className="title">Analytics Engine</h1>
+          <PageHeader
+            eyebrow="Intelligence & metrics"
+            title="Analytics Engine"
+            description="Heatmaps, trends, and per-subject drilldowns for your study campaign."
+          />
 
-          <div className="card" style={{ marginTop: 32 }}>
+          <div className="card">
             <span className="subtitle">Subject Drilldown</span>
             <p style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 16 }}>
               Select a subject to inspect 30-day trend, operation mix, and recent sessions.
@@ -2060,21 +2551,13 @@
                 <button
                   key={subject}
                   type="button"
-                  className="btn"
-                  style={{
-                    width: "auto",
-                    padding: "8px 14px",
-                    fontSize: 12,
-                    background: selectedSubject === subject ? "var(--accent-soft)" : "var(--bg2)",
-                    borderColor: selectedSubject === subject ? "var(--accent-mid)" : "var(--border)",
-                    color: selectedSubject === subject ? "var(--text)" : "var(--text-muted)",
-                  }}
+                  className={`chip${selectedSubject === subject ? " active" : ""}`}
                   onClick={() => {
                     haptic('light');
                     setSelectedSubject(selectedSubject === subject ? null : subject);
                   }}
                 >
-                  {subject} <span className="font-mono" style={{ opacity: 0.7 }}>({hours.toFixed(1)}h)</span>
+                  {subject} <span className="font-mono" style={{ opacity: 0.75 }}>({hours.toFixed(1)}h)</span>
                 </button>
               ))}
             </div>
@@ -2090,7 +2573,11 @@
                 </div>
 
                 {subjectSessions.length === 0 ? (
-                  <div style={{ color: "var(--text-dim)", fontSize: 13, padding: "20px 0" }}>No sessions logged for this subject yet.</div>
+                  <div className="empty-state" style={{ padding: "24px 12px" }}>
+                    <div className="empty-state-icon">📊</div>
+                    <div className="empty-state-title">No data for {selectedSubject}</div>
+                    <p className="empty-state-desc">Log hours in Deploy with this subject to see trends.</p>
+                  </div>
                 ) : (
                   <>
                     <div style={{ marginBottom: 20 }}>
@@ -2133,13 +2620,14 @@
             )}
           </div>
 
-          <div className="card stagger-item">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div className="card static stagger-item">
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 8 }}>
               <span className="subtitle" style={{ margin: 0 }}>Daily Hours Activity</span>
-              <div style={{ display: "flex", gap: 8 }}>
-                <button onClick={() => { setLineTimeframe('week'); haptic('light'); }} style={{ background: lineTimeframe==='week'?'var(--bg3)':'transparent', border: 'none', color: lineTimeframe==='week'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>WEEK</button>
-                <button onClick={() => { setLineTimeframe('month'); haptic('light'); }} style={{ background: lineTimeframe==='month'?'var(--bg3)':'transparent', border: 'none', color: lineTimeframe==='month'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>MONTH</button>
-              </div>
+              <SegControl
+                value={lineTimeframe}
+                onChange={(id) => { setLineTimeframe(id); haptic('light'); }}
+                options={[{ id: 'week', label: 'Week' }, { id: 'month', label: 'Month' }]}
+              />
             </div>
             {renderLineChart(lineData, lineDays, true)}
           </div>
@@ -2160,13 +2648,14 @@
               </div>
             </div>
 
-            <div className="card stagger-item" style={{ animationDelay: '0.2s' }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div className="card static stagger-item" style={{ animationDelay: '0.2s' }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 8 }}>
                 <span className="subtitle" style={{ margin: 0 }}>Deployment Trends</span>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <button onClick={() => { setTimeframe('weekly'); haptic('light'); }} style={{ background: timeframe==='weekly'?'var(--bg3)':'transparent', border: 'none', color: timeframe==='weekly'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>WEEKLY</button>
-                  <button onClick={() => { setTimeframe('monthly'); haptic('light'); }} style={{ background: timeframe==='monthly'?'var(--bg3)':'transparent', border: 'none', color: timeframe==='monthly'?'var(--text)':'var(--text-dim)', padding: '4px 8px', borderRadius: 5, fontSize: 10, cursor: 'pointer', fontWeight: 500, transition: 'all 0.2s' }}>MONTHLY</button>
-                </div>
+                <SegControl
+                  value={timeframe}
+                  onChange={(id) => { setTimeframe(id); haptic('light'); }}
+                  options={[{ id: 'weekly', label: 'Weekly' }, { id: 'monthly', label: 'Monthly' }]}
+                />
               </div>
               
               <div className="bar-chart-container">
@@ -2209,21 +2698,24 @@
 
       return (
         <div className="animate-in">
-          <span className="subtitle">Evaluation & Metrics</span>
-          <h1 className="title">Testing Sector</h1>
+          <PageHeader
+            eyebrow="Evaluation & metrics"
+            title="Testing Sector"
+            description="Log mocks and sectionals — track accuracy trends over time."
+          />
 
-          <div className="grid-3" style={{ marginTop: 32, marginBottom: 24 }}>
-            <div className="card stagger-item" style={{ padding: "16px 24px", marginBottom: 0 }}>
-              <span className="subtitle" style={{ marginBottom: 8 }}>Operations Conducted</span>
-              <div className="font-syne" style={{ fontSize: 28, fontWeight: 800 }}>{tests.length}</div>
+          <div className="grid-3" style={{ marginBottom: 24 }}>
+            <div className="card stat-card static stagger-item" style={{ padding: "16px 24px" }}>
+              <div className="stat-label">Operations Conducted</div>
+              <div className="stat-value">{tests.length}</div>
             </div>
-            <div className="card stagger-item" style={{ animationDelay: '0.1s', padding: "16px 24px", marginBottom: 0 }}>
-              <span className="subtitle" style={{ marginBottom: 8 }}>Average Accuracy</span>
-              <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, color: "var(--accent)" }}>{avgScore}%</div>
+            <div className="card stat-card static stagger-item" style={{ animationDelay: '0.1s', padding: "16px 24px" }}>
+              <div className="stat-label">Average Accuracy</div>
+              <div className="stat-value" style={{ color: "var(--accent)" }}>{avgScore}%</div>
             </div>
-            <div className="card stagger-item" style={{ animationDelay: '0.2s', padding: "16px 24px", marginBottom: 0 }}>
-              <span className="subtitle" style={{ marginBottom: 8 }}>Peak Performance</span>
-              <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, color: "var(--success)" }}>{peakScore}%</div>
+            <div className="card stat-card static stagger-item" style={{ animationDelay: '0.2s', padding: "16px 24px" }}>
+              <div className="stat-label">Peak Performance</div>
+              <div className="stat-value" style={{ color: "var(--success)" }}>{peakScore}%</div>
             </div>
           </div>
 
@@ -2256,7 +2748,11 @@
             <div className="card stagger-item" style={{ animationDelay: '0.4s' }}>
               <span className="subtitle">Performance Trend (Accuracy %)</span>
               {tests.length === 0 ? (
-                <div style={{ height: 180, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-dim)", fontSize: 13 }}>No test data available.</div>
+                <div className="empty-state" style={{ padding: "32px 12px" }}>
+                  <div className="empty-state-icon">📐</div>
+                  <div className="empty-state-title">No test data yet</div>
+                  <p className="empty-state-desc">Log a mock or sectional to see your accuracy trend.</p>
+                </div>
               ) : (
                 <div className="bar-chart-container" style={{ paddingTop: 30 }}>
                   {sortedTests.slice(-10).map((t, i) => {
@@ -2277,7 +2773,13 @@
 
           <div className="card stagger-item" style={{ animationDelay: '0.5s' }}>
             <span className="subtitle">Intelligence Archive</span>
-            {tests.length === 0 && <div style={{ color: "var(--text-dim)", fontSize: 13 }}>No tests recorded.</div>}
+            {tests.length === 0 && (
+              <div className="empty-state" style={{ padding: "24px 12px" }}>
+                <div className="empty-state-icon">🗂️</div>
+                <div className="empty-state-title">Archive empty</div>
+                <p className="empty-state-desc">Logged tests will show up here with scores and dates.</p>
+              </div>
+            )}
             {tests.slice().reverse().map((t, i) => (
               <div key={t.id} className="stagger-item" style={{ animationDelay: `${i * 0.05}s`, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px", background: "var(--bg2)", borderRadius: 8, marginBottom: 8 }}>
                 <div>
@@ -2311,6 +2813,7 @@
         const v = typeof value === "number" ? value : parseFloat(goalInput);
         if (!Number.isFinite(v) || v < 1 || v > 16) {
           haptic('error');
+          showToast("Daily goal must be between 1 and 16 hours.", "error");
           return;
         }
         const rounded = Math.round(v * 2) / 2;
@@ -2318,6 +2821,7 @@
         setGoalInput(String(rounded));
         setGoalSaved(true);
         haptic('success');
+        showToast(`Daily goal set to ${rounded}h`, "success");
         setTimeout(() => setGoalSaved(false), 2000);
       };
 
@@ -2337,6 +2841,7 @@
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
+        showToast("Backup downloaded.", "success");
       };
 
       const onImportFile = async (e) => {
@@ -2351,9 +2856,11 @@
           }
           importData(payload);
           setImportMsg("Backup imported successfully.");
+          showToast("Backup imported successfully.", "success");
           haptic('success');
         } catch (err) {
           setImportMsg("Import failed. Please choose a valid backup JSON.");
+          showToast("Import failed — check the JSON file.", "error");
           haptic('error');
         } finally {
           e.target.value = "";
@@ -2362,10 +2869,13 @@
 
       return (
         <div className="animate-in">
-          <span className="subtitle">Control Center</span>
-          <h1 className="title">Settings & Data</h1>
+          <PageHeader
+            eyebrow="Control center"
+            title="Settings & Data"
+            description="Daily goals, theme, backups, and full reset."
+          />
 
-          <div className="grid-2" style={{ marginTop: 32 }}>
+          <div className="grid-2">
             <div className="card">
               <span className="subtitle">Study Goals</span>
               <p style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 16 }}>
